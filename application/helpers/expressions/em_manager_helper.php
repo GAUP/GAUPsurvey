@@ -8973,6 +8973,7 @@ EOD;
                             case 'Q': //MULTIPLE SHORT TEXT
                             case ';': //ARRAY (Multi Flexi) Text
                             case 'S': //SHORT FREE TEXT
+                            case '9': //GeoPoint
                             case 'T': //LONG FREE TEXT
                             case 'U': //HUGE FREE TEXT
                             case '*': //Equation

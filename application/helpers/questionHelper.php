@@ -171,7 +171,7 @@ class questionHelper
         "caption"=>gT('Display columns'));
 
         self::$attributes["display_rows"]=array(
-        "types"=>"QSTU",
+        "types"=>"QSTU9",
         'category'=>gT('Display'),
         'sortorder'=>100,
         'inputtype'=>'text',
@@ -258,7 +258,7 @@ class questionHelper
         "caption"=>gT('Equals sum value'));
 
         self::$attributes["em_validation_q"]=array(
-        "types"=>":;ABCDEFKMNOPQRSTU",
+        "types"=>":;ABCDEFKMNOPQRSTU9",
         'category'=>gT('Logic'),
         'sortorder'=>200,
         'inputtype'=>'textarea',
@@ -266,7 +266,7 @@ class questionHelper
         "caption"=>gT('Question validation equation'));
 
         self::$attributes["em_validation_q_tip"]=array(
-        "types"=>":;ABCDEFKMNOPQRSTU",
+        "types"=>":;ABCDEFKMNOPQRSTU9",
         'category'=>gT('Logic'),
         'sortorder'=>210,
         'inputtype'=>'textarea',
@@ -274,7 +274,7 @@ class questionHelper
         "caption"=>gT('Question validation tip'));
 
         self::$attributes["em_validation_sq"]=array(
-        "types"=>";:KQSTUN",
+        "types"=>";:KQSTUN9",
         'category'=>gT('Logic'),
         'sortorder'=>220,
         'inputtype'=>'textarea',
@@ -282,7 +282,7 @@ class questionHelper
         "caption"=>gT('Sub-question validation equation'));
 
         self::$attributes["em_validation_sq_tip"]=array(
-        "types"=>";:KQSTUN",
+        "types"=>";:KQSTUN9",
         'category'=>gT('Logic'),
         'sortorder'=>230,
         'inputtype'=>'textarea',
@@ -311,7 +311,7 @@ class questionHelper
         // Map Options
 
         self::$attributes["location_city"]=array(
-        "types"=>"S",
+        "types"=>"S9",
         'readonly_when_active'=>true,
         'category'=>gT('Location'),
         'sortorder'=>100,
@@ -323,7 +323,7 @@ class questionHelper
         "caption"=>gT("Save city"));
 
         self::$attributes["location_state"]=array(
-        "types"=>"S",
+        "types"=>"S9",
         'readonly_when_active'=>true,
         'category'=>gT('Location'),
         'sortorder'=>100,
@@ -335,7 +335,7 @@ class questionHelper
         "caption"=>gT("Save state"));
 
         self::$attributes["location_postal"]=array(
-        "types"=>"S",
+        "types"=>"S9",
         'readonly_when_active'=>true,
         'category'=>gT('Location'),
         'sortorder'=>100,
@@ -347,7 +347,7 @@ class questionHelper
         "caption"=>gT("Save postal code"));
 
         self::$attributes["location_country"]=array(
-        "types"=>"S",
+        "types"=>"S9",
         'readonly_when_active'=>true,
         'category'=>gT('Location'),
         'sortorder'=>100,
@@ -359,7 +359,7 @@ class questionHelper
         "caption"=>gT("Save country"));
 
         self::$attributes["statistics_showmap"]=array(
-        "types"=>"S",
+        "types"=>"S9",
         'category'=>gT('Statistics'),
         'inputtype'=>'switch',
         'sortorder'=>100,
@@ -370,7 +370,7 @@ class questionHelper
         );
 
         self::$attributes["statistics_showgraph"]=array(
-        'types'=>'15ABCDEFGHIKLMNOPQRSTUWXYZ!:;|*',
+        'types'=>'15ABCDEFGHIKLMNOPQRSTUWXYZ!:;|*9',
         'category'=>gT('Statistics'),
         'inputtype'=>'switch',
         'sortorder'=>101,
@@ -381,7 +381,7 @@ class questionHelper
         );
 
         self::$attributes["statistics_graphtype"]=array(
-        "types"=>'15ABCDEFGHIKLMNOQRSTUWXYZ!:;|*',
+        "types"=>'15ABCDEFGHIKLMNOQRSTUWXYZ!:;|*9',
         'category'=>gT('Statistics'),
         'inputtype'=>'singleselect',
         'sortorder'=>102,
@@ -399,7 +399,7 @@ class questionHelper
         );
 
         self::$attributes["location_mapservice"]=array(
-        "types"=>"S",
+        "types"=>"S9",
         'category'=>gT('Location'),
         'sortorder'=>90,
         'inputtype'=>'buttongroup',
@@ -412,7 +412,7 @@ class questionHelper
         "caption"=>gT("Use mapping service"));
 
         self::$attributes["location_mapwidth"]=array(
-        "types"=>"S",
+        "types"=>"S9",
         'category'=>gT('Location'),
         'sortorder'=>102,
         'inputtype'=>'text',
@@ -421,7 +421,7 @@ class questionHelper
         "caption"=>gT("Map width"));
 
         self::$attributes["location_mapheight"]=array(
-        "types"=>"S",
+        "types"=>"S9",
         'category'=>gT('Location'),
         'sortorder'=>103,
         'inputtype'=>'text',
@@ -430,7 +430,7 @@ class questionHelper
         "caption"=>gT("Map height"));
 
         self::$attributes["location_nodefaultfromip"]=array(
-        "types"=>"S",
+        "types"=>"S9",
         'category'=>gT('Location'),
         'sortorder'=>91,
         'inputtype'=>'singleselect',
@@ -441,7 +441,7 @@ class questionHelper
         "caption"=>gT("IP as default location"));
 
         self::$attributes["location_defaultcoordinates"]=array(
-        "types"=>"S",
+        "types"=>"S9",
         'category'=>gT('Location'),
         'sortorder'=>101,
         'inputtype'=>'text',
@@ -449,18 +449,65 @@ class questionHelper
         "caption"=>gT('Default position'));
 
         self::$attributes["location_mapzoom"]=array(
-        "types"=>"S",
+        "types"=>"S9",
         'category'=>gT('Location'),
-        'sortorder'=>101,
+        'sortorder'=>105,
         'inputtype'=>'text',
         'default'=>'11',
         "help"=>gT("Map zoom level"),
         "caption"=>gT("Zoom level"));
 
+        self::$attributes["location_showgeosearch"]=array(
+        "types"=>"9",
+        'category'=>gT('Location'),
+        'sortorder'=>90,
+        'inputtype'=>'switch',
+        'options'=>array(1=>gT('Yes'), 0=>gT('No')),
+        'default' => 0,
+        "help"=>gT("Show search box?"),
+        "caption"=>gT("Allow text-input searching"));
+
+        self::$attributes["location_mapzoommin"]=array(
+        "types"=>"S9",
+        'category'=>gT('Location'),
+        'sortorder'=>106,
+        'inputtype'=>'text',
+        'default'=>'10',
+        "help"=>gT("Minimum Map zoom level"),
+        "caption"=>gT("Minimum Zoom level"));
+
+        self::$attributes["location_mapzoommax"]=array(
+        "types"=>"S9",
+        'category'=>gT('Location'),
+        'sortorder'=>107,
+        'inputtype'=>'text',
+        'default'=>'16',
+        "help"=>gT("Maximum Map zoom level"),
+        "caption"=>gT("Maximum Zoom level"));
+
+        self::$attributes["location_maxbounds"]=array(
+        "types"=>"S9",
+        'category'=>gT('Location'),
+        'sortorder'=>108,
+        'default'=>'-90 -180 90 180',
+        'inputtype'=>'text',
+        "help"=>gT('Default MaxBounds coordinates of the map when the page first loads. Format: latitude [space] longtitude [space] latitude [space] longtitude'),
+        "caption"=>gT('Maximum map boundaries'));
+
+        self::$attributes["location_homebutton"]=array(
+        "types"=>"9",
+        'category'=>gT('Location'),
+        'sortorder'=>109,
+        'inputtype'=>'switch',
+        'options'=>array(1=>gT('Yes'), 0=>gT('No')),
+        'default' => 0,
+        "help"=>gT("Shows a button allowing the map view to be re-centered"),
+        "caption"=>gT("Show home button"));
+
         // End Map Options
 
         self::$attributes["hide_tip"]=array(
-        "types"=>"15ABCDEFGHIKLMNOPQRSTUXY!:;|",
+        "types"=>"15ABCDEFGHIKLMNOPQRSTUXY!:;|9",
         'category'=>gT('Display'),
         'sortorder'=>100,
         'inputtype'=>'switch',
@@ -471,7 +518,7 @@ class questionHelper
         "caption"=>gT('Hide tip'));
 
         self::$attributes['hidden']=array(
-        'types'=>'15ABCDEFGHIKLMNOPQRSTUWXYZ!:;|*',
+        'types'=>'15ABCDEFGHIKLMNOPQRSTUWXYZ!:;|*9',
         'category'=>gT('Display'),
         'sortorder'=>101,
         'inputtype'=>'switch',
@@ -482,7 +529,7 @@ class questionHelper
         'caption'=>gT('Always hide this question'));
 
         self::$attributes['cssclass']=array(
-            'types'=>'15ABCDEFGHIKLMNOPQRSTUWXYZ!:;|*',
+            'types'=>'15ABCDEFGHIKLMNOPQRSTUWXYZ!:;|*9',
             'category'=>gT('Display'),
             'sortorder'=>102,
             'inputtype'=>'text',
@@ -532,7 +579,7 @@ class questionHelper
         "caption"=>gT('Maximum columns for answers'));
 
         self::$attributes["maximum_chars"]=array(
-        "types"=>"STUNQK:;",
+        "types"=>"STUNQK:;9",
         'category'=>gT('Input'),
         'sortorder'=>100,
         'inputtype'=>'text',
@@ -622,7 +669,7 @@ class questionHelper
         "caption"=>gT('Integer only'));
 
         self::$attributes["numbers_only"]=array(
-        "types"=>"Q;S*",
+        "types"=>"Q;S*9",
         'category'=>gT('Other'),
         'sortorder'=>150,
         'inputtype'=>'switch',
@@ -708,7 +755,7 @@ class questionHelper
         "caption"=>gT("Label for 'Other:' option"));
 
         self::$attributes["page_break"]=array(
-        "types"=>"15ABCDEFGHKLMNOPQRSTUWXYZ!:;|*",
+        "types"=>"15ABCDEFGHKLMNOPQRSTUWXYZ!:;|*9",
         'category'=>gT('Other'),
         'sortorder'=>100,
         'inputtype'=>'switch',
@@ -719,7 +766,7 @@ class questionHelper
         "caption"=>gT('Insert page break in printable view'));
 
         self::$attributes["prefix"]=array(
-        "types"=>"KNQS",
+        "types"=>"KNQS9",
         'category'=>gT('Display'),
         'sortorder'=>10,
         'inputtype'=>'text',
@@ -933,7 +980,7 @@ class questionHelper
         "caption"=>gT('Slider left/right text separator'));
 
         self::$attributes["suffix"]=array(
-        "types"=>"KNQS",
+        "types"=>"KNQS9",
         'category'=>gT('Display'),
         'sortorder'=>11,
         'inputtype'=>'text',
@@ -942,7 +989,7 @@ class questionHelper
         "caption"=>gT('Answer suffix'));
 
         self::$attributes["text_input_width"]=array(
-        "types"=>"KNSTU;",
+        "types"=>"KNSTU;9",
         'category'=>gT('Display'),
         'sortorder'=>100,
         'inputtype'=>'singleselect',
@@ -1079,7 +1126,7 @@ class questionHelper
 
         //Timer attributes
         self::$attributes["time_limit"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>90,
         "inputtype"=>"integer",
@@ -1087,7 +1134,7 @@ class questionHelper
         "caption"=>gT("Time limit"));
 
         self::$attributes["time_limit_action"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>92,
         'inputtype'=>'singleselect',
@@ -1099,7 +1146,7 @@ class questionHelper
         "caption"=>gT("Time limit action"));
 
         self::$attributes["time_limit_disable_next"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>94,
         "inputtype"=>"switch",
@@ -1110,7 +1157,7 @@ class questionHelper
         "caption"=>gT("Time limit disable next"));
 
         self::$attributes["time_limit_disable_prev"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>96,
         "inputtype"=>"switch",
@@ -1121,7 +1168,7 @@ class questionHelper
         "caption"=>gT("Time limit disable prev"));
 
         self::$attributes["time_limit_countdown_message"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>98,
         "inputtype"=>"textarea",
@@ -1130,7 +1177,7 @@ class questionHelper
         "caption"=>gT("Time limit countdown message"));
 
         self::$attributes["time_limit_timer_style"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>100,
         "inputtype"=>"textarea",
@@ -1138,7 +1185,7 @@ class questionHelper
         "caption"=>gT("Time limit timer CSS style"));
 
         self::$attributes["time_limit_message_delay"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>102,
         "inputtype"=>"integer",
@@ -1146,7 +1193,7 @@ class questionHelper
         "caption"=>gT("Time limit expiry message display time"));
 
         self::$attributes["time_limit_message"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>104,
         "inputtype"=>"textarea",
@@ -1155,7 +1202,7 @@ class questionHelper
         "caption"=>gT("Time limit expiry message"));
 
         self::$attributes["time_limit_message_style"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>106,
         "inputtype"=>"textarea",
@@ -1163,7 +1210,7 @@ class questionHelper
         "caption"=>gT("Time limit message CSS style"));
 
         self::$attributes["time_limit_warning"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>108,
         "inputtype"=>"integer",
@@ -1171,7 +1218,7 @@ class questionHelper
         "caption"=>gT("1st time limit warning message timer"));
 
         self::$attributes["time_limit_warning_display_time"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>110,
         "inputtype"=>"integer",
@@ -1179,7 +1226,7 @@ class questionHelper
         "caption"=>gT("1st time limit warning message display time"));
 
         self::$attributes["time_limit_warning_message"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>112,
         "inputtype"=>"textarea",
@@ -1188,7 +1235,7 @@ class questionHelper
         "caption"=>gT("1st time limit warning message"));
 
         self::$attributes["time_limit_warning_style"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>114,
         "inputtype"=>"textarea",
@@ -1196,7 +1243,7 @@ class questionHelper
         "caption"=>gT("1st time limit warning CSS style"));
 
         self::$attributes["time_limit_warning_2"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>116,
         "inputtype"=>"integer",
@@ -1204,7 +1251,7 @@ class questionHelper
         "caption"=>gT("2nd time limit warning message timer"));
 
         self::$attributes["time_limit_warning_2_display_time"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>118,
         "inputtype"=>"integer",
@@ -1212,7 +1259,7 @@ class questionHelper
         "caption"=>gT("2nd time limit warning message display time"));
 
         self::$attributes["time_limit_warning_2_message"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>120,
         "inputtype"=>"textarea",
@@ -1221,7 +1268,7 @@ class questionHelper
         "caption"=>gT("2nd time limit warning message"));
 
         self::$attributes["time_limit_warning_2_style"]=array(
-        "types"=>"STUXL!",
+        "types"=>"STUXL!9",
         'category'=>gT('Timer'),
         'sortorder'=>122,
         "inputtype"=>"textarea",
@@ -1317,7 +1364,7 @@ class questionHelper
         "caption"=>gT("Allowed file types"));
 
         self::$attributes["random_group"]=array(
-        "types"=>"15ABCDEFGHIKLMNOPQRSTUWXYZ!:;|",
+        "types"=>"15ABCDEFGHIKLMNOPQRSTUWXYZ!:;|9",
         'category'=>gT('Logic'),
         'sortorder'=>180,
         'inputtype'=>'text',

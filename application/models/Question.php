@@ -584,6 +584,13 @@ class Question extends LSActiveRecord
                 'hasdefaultvalues' => 1,
                 'assessable' => 0,
                 'answerscales' => 0),
+            "9" => array(
+                'description' => gT("GeoPoint"),
+                'group' => gT("Text questions"),
+                'subquestions' => 0,
+                'hasdefaultvalues' => 1,
+                'assessable' => 0,
+                'answerscales' => 0),
             "T" => array(
                 'description' => gT("Long Free Text"),
                 'group' => gT("Text questions"),
@@ -687,6 +694,7 @@ class Question extends LSActiveRecord
             case 'Q': return 'multiple-short-txt';
             case 'R': return 'ranking';
             case 'S': return 'text-short';
+            case '9': return 'text-short';
             case 'T': return 'text-long';
             case 'U': return 'text-huge';
             //case 'W': return 'list-dropdown-flexible'; //   LIST drop-down (flexible label)

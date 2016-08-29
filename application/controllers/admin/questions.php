@@ -1069,7 +1069,7 @@ class questions extends Survey_Common_Action
         $eqrow['title'] = '';
         $eqrow['question'] = '';
         $eqrow['help'] = '';
-        $eqrow['type'] = 'T';
+        $eqrow['type'] = '9';
         $eqrow['lid'] = 0;
         $eqrow['lid1'] = 0;
         $eqrow['gid'] = NULL;

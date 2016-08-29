@@ -1518,6 +1518,7 @@ function getExtendedAnswer($iSurveyID, $sFieldCode, $sValue, $sLanguage)
                 case "I": $this_answer=gT("Increase",null,$sLanguage); break;
                 case "D": $this_answer=gT("Decrease",null,$sLanguage); break;
                 case "S": $this_answer=gT("Same",null,$sLanguage); break;
+                case "9": $this_answer=gT("Same",null,$sLanguage); break;
             }
             break;
             case "F":
@@ -1688,6 +1689,7 @@ function validateEmailAddresses($aEmailAddressList){
                 case "T": // Long free text
                 case "U": // Huge free text
                 case "S": // Short free text
+                case "9": // GeoPoint
                     $myfield="T$myfield";
                     $allfields[] = $myfield;
                     break;
