@@ -43,14 +43,14 @@ $config['rootdir']            =   getcwd(); //dirname(__FILE__); // This is the 
 
 
 // Site Info
-$config['sitename']           =   'LimeSurvey';     // The official name of the site (appears in the Window title)
+$config['sitename']           =   'GAUPSurvey';     // The official name of the site (appears in the Window title)
 $config['scriptname']         =   'admin.php';      // The name of the admin script
 
 $config['defaultuser']        =   'admin';          // This is the default username when LimeSurvey is installed
 $config['defaultpass']        =   'password';       // This is the default password for the default user when LimeSurvey is installed
 
 // Styling options
-$config['admintheme']         =  'Sea_Green';     // This setting specifys the directory where the admin finds it theme/css style files, e.g. setting 'default' points to /admin/styles/default
+$config['admintheme']         =  'Bay_of_Many';     // This setting specifys the directory where the admin finds it theme/css style files, e.g. setting 'default' points to /admin/styles/default
 $config['adminthemeiconsize'] =  32;                // This settings describes the icon size for a normal toolbar icon - default for gringegreen is 32
 
 
@@ -65,7 +65,7 @@ $config['allow_templates_to_overwrite_views'] = 0;
 // Only applicable, of course, if you have chosen 'R' for $dropdowns and/or $lwcdropdowns
 $config['repeatheadings']     =   '25';             // The number of answers to show before repeating the headings in array (flexible) questions. Set to 0 to turn this feature off
 $config['minrepeatheadings']  =   3;                // The minimum number of remaining answers that are required before repeating the headings in array (flexible) questions.
-$config['defaultlang']        =   'en';             // The default language to use - the available languages are the directory names in the /locale dir - for example de = German
+$config['defaultlang']        =   'pt-BR';          // The default language to use - the available languages are the directory names in the /locale dir - for example de = German
 
 $config['timeadjust']         =   0;                // Number of hours to adjust between your webserver local time and your own local time (for datestamping responses)
 $config['allowexportalldb']   =   0;                // 0 will only export prefixed tables when doing a database dump. If set to 1 ALL tables in the database will be exported
