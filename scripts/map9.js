@@ -107,6 +107,11 @@
       homeButton = MapOption.homeButton;
     }
 
+    var geojson = '';
+    if ((typeof(MapOption.geojson) != 'undefined')) {
+       geojson = MapOption.geojson;
+    }
+
     var maxBounds0 = -90;
     var maxBounds1 = -180;
     var maxBounds2 = 90;
@@ -129,6 +134,14 @@
     if (homeButton) {
       var zoomHome = L.Control.zoomHome({position: 'topleft'});
       zoomHome.addTo(map);
+    }
+
+    if (geojson != ''){
+      geojson = JSON.parse(geojson);
+      L.geoJson(geojson, {
+        // Add invert: true to invert the geometries in the GeoJSON file
+        invert: true
+        }).addTo(map);
     }
 
  		//function zoomExtent(){ // todo: restrict to rect ?

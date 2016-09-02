@@ -3889,6 +3889,7 @@ function do_geopoint($ia)
             'maxBounds2'=>$mapMaxBounds[2],
             'maxBounds3'=>$mapMaxBounds[3],
             'homeButton'=>$aQuestionAttributes['location_homebutton'],
+            'geojson'=>$aQuestionAttributes['location_geojson'],
 
         );
         App()->getClientScript()->registerPackage('leaflet');
@@ -3900,6 +3901,10 @@ function do_geopoint($ia)
         {
           Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.zoomhome.js");
           Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'leaflet.zoomhome.css');
+        }
+        if ($aQuestionAttributes['location_geojson'] <> '')
+        {
+          Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.snogylop.js");
         }
 
 

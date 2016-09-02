@@ -504,6 +504,15 @@ class questionHelper
         "help"=>gT("Shows a button allowing the map view to be re-centered"),
         "caption"=>gT("Show home button"));
 
+        self::$attributes["location_geojson"]=array(
+        "types"=>"9",
+        'category'=>gT('Location'),
+        'sortorder'=>110,
+        'inputtype'=>'textarea',
+        'default'=>'',
+        "help"=>gT('GeoJSON/Polygon'),
+        "caption"=>gT("Polygon"));
+
         // End Map Options
 
         self::$attributes["hide_tip"]=array(
