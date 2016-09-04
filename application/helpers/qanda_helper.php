@@ -73,8 +73,34 @@ function setNoAnswerMode($thissurvey)
 * and a list of the question/answer fieldnames associated. It is called from
 * question.php, group.php, survey.php or preview.php
 *
-* @param mixed $ia
-* @return mixed
+* @param array $ia Details of $ia can be found at top of this file
+* @return array Array like [array $qanda, array $inputnames] where
+*               $qanda has elements [
+*                 $qtitle (question_text) : array [
+                        all : string; complete HTML?; all has been added for backwards compatibility with templates that use question_start.pstpl (now redundant)
+                        'text'               => $qtitle, question?? $ia[3]?
+                        'code'               => $ia[2] or title??
+                        'number'             => $number
+                        'help'               => ''
+                        'mandatory'          => ''
+                        man_message : string; message when mandatory is not answered
+                        'valid_message'      => ''
+                        file_valid_message : string; only relevant for file upload
+                        'class'              => ''
+                        'man_class'          => ''
+                        'input_error_class'  => ''              // provides a class.
+                        'essentials'         => ''
+*                 ]
+*                 $answer ?
+*                 'help' : string
+*                 $display : ?
+*                 $qid  : integer
+*                 $ia[2] = title;
+*                 $ia[5] = group id : int
+*                 $ia[1] = fieldname : string
+*               ]
+*               and $inputnames is ? used for hiddenfieldnames and upload file?
+*
 */
 function retrieveAnswers($ia)
 {
