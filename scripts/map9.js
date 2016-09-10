@@ -1,9 +1,3 @@
-/*
- * @license This file is part of LimoNada
- * See COPYRIGHT.php for copyright notices and details.
- *
- */
-
  /*
   * @license This file is part of LimeSurvey
   * See COPYRIGHT.php for copyright notices and details.
@@ -14,7 +8,6 @@
  {
  	$(".location").each(function(index,element){
  		var question = $(element).attr('name');
-    // alert (question);
  		var coordinates = $(element).val();
  		var latLng = coordinates.split(" ");
  		var question_id = question.substr(0,question.length-2);
@@ -136,9 +129,10 @@
       zoomHome.addTo(map);
     }
 
+    var polygongeojson;
     if (geojson != ''){
       geojson = JSON.parse(geojson);
-      L.geoJson(geojson, {
+      polygongeojson = L.geoJson(geojson, {
         // Add invert: true to invert the geometries in the GeoJSON file
         invert: true
         }).addTo(map);
@@ -175,11 +169,17 @@
  		var marker = new L.marker([lat,lng], {title:'Current Location',id:1,draggable:'true'});
  		map.addLayer(marker);
 
+    if (geojson != '') {
+      overlays = {
+        "AREA": polygongeojson
+      };
+    }
+
  		var layerControl = L.control.layers(baseLayers, overlays, {
  		  collapsed: true
  		}).addTo(map);
 
- 		map.on('click',
+ 		map.on('singleclick',
  			function(e) {
  				var coords = L.latLng(e.latlng.lat,e.latlng.lng);
  				marker.setLatLng(coords);
