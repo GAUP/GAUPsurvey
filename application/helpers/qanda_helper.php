@@ -3513,7 +3513,8 @@ function do_shortfreetext($ia)
 
         $currentLocation = $currentLatLong[0] . " " . $currentLatLong[1];
 
-        Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."map.js");
+        if (!(Yii::app()->getClientScript()->isScriptFileRegistered(Yii::app()->getConfig('generalscripts')."map9.js")))
+          Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."map.js");
         if ($aQuestionAttributes['location_mapservice']==1 && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off")
             Yii::app()->getClientScript()->registerScriptFile("https://maps.googleapis.com/maps/api/js?sensor=false$sGoogleMapsAPIKey");
         else if ($aQuestionAttributes['location_mapservice']==1)
@@ -3588,8 +3589,10 @@ function do_shortfreetext($ia)
         App()->getClientScript()->registerPackage('leaflet');
         Yii::app()->getClientScript()->registerScript('sGlobalMapScriptVar',"LSmap=".ls_json_encode($aGlobalMapScriptVar).";\nLSmaps= new Array();",CClientScript::POS_HEAD);
         Yii::app()->getClientScript()->registerScript('sThisMapScriptVar'.$ia[1],"LSmaps['{$ia[1]}']=".ls_json_encode($aThisMapScriptVar),CClientScript::POS_HEAD);
-        Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."map.js");
-        Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'map.css');
+        if (!(Yii::app()->getClientScript()->isScriptFileRegistered(Yii::app()->getConfig('generalscripts')."map9.js")))
+          Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."map.js");
+        if (!(Yii::app()->getClientScript()->isCssFileRegistered(Yii::app()->getConfig('publicstyleurl') . 'map9.css')))
+          Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'map.css');
 
 
         if (isset($aQuestionAttributes['hide_tip']) && $aQuestionAttributes['hide_tip']==0)
