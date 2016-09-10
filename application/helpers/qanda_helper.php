@@ -3931,6 +3931,7 @@ function do_geopoint($ia)
         Yii::app()->getClientScript()->registerScript('sThisMapScriptVar'.$ia[1],"LSmaps['{$ia[1]}']=".ls_json_encode($aThisMapScriptVar),CClientScript::POS_HEAD);
         Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."map9.js");
         Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'map9.css');
+        Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."singleclick.js");
         if ($aQuestionAttributes['location_homebutton'] == 1)
         {
           Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.zoomhome.js");

@@ -179,7 +179,7 @@
  		  collapsed: true
  		}).addTo(map);
 
- 		map.on('click',
+ 		map.on('singleclick',
  			function(e) {
  				var coords = L.latLng(e.latlng.lat,e.latlng.lng);
  				marker.setLatLng(coords);
