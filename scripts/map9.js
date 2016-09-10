@@ -1,9 +1,3 @@
-/*
- * @license This file is part of LimoNada
- * See COPYRIGHT.php for copyright notices and details.
- *
- */
-
  /*
   * @license This file is part of LimeSurvey
   * See COPYRIGHT.php for copyright notices and details.
@@ -14,7 +8,6 @@
  {
  	$(".location").each(function(index,element){
  		var question = $(element).attr('name');
-    // alert (question);
  		var coordinates = $(element).val();
  		var latLng = coordinates.split(" ");
  		var question_id = question.substr(0,question.length-2);
