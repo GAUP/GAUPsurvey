@@ -3957,7 +3957,7 @@ function do_geopoint($ia)
             'location_mapwidth'=>$aQuestionAttributes['location_mapwidth'],
             'location_showgeosearch'=>$aQuestionAttributes['location_showgeosearch'],
             'questionHelp'=>(isset($questionHelp))?$questionHelp:'',
-            'question_text_help'=>$question_text['help'],
+            'question_text_help'=>(isset($question_text['help']))?$question_text['help']:'',
             'location_value'=> $currentLatLong[0].' '.$currentLatLong[1],
             'currentLat'=>$currentLatLong[0],
             'currentLong'=>$currentLatLong[1],
