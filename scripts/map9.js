@@ -129,9 +129,10 @@
       zoomHome.addTo(map);
     }
 
+    var polygongeojson;
     if (geojson != ''){
       geojson = JSON.parse(geojson);
-      L.geoJson(geojson, {
+      polygongeojson = L.geoJson(geojson, {
         // Add invert: true to invert the geometries in the GeoJSON file
         invert: true
         }).addTo(map);
@@ -167,6 +168,12 @@
 
  		var marker = new L.marker([lat,lng], {title:'Current Location',id:1,draggable:'true'});
  		map.addLayer(marker);
+
+    if (geojson != '') {
+      overlays = {
+        "AREA": polygongeojson
+      };
+    }
 
  		var layerControl = L.control.layers(baseLayers, overlays, {
  		  collapsed: true
