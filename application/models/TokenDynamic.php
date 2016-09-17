@@ -609,6 +609,7 @@ class TokenDynamic extends LSActiveRecord
 
     public function getStandardColsForGrid()
     {
+        $dateformatdetails = getDateFormatData(Yii::app()->session['dateformat']);
         return array(
             array(
                 'id'=>'tid',
@@ -734,7 +735,7 @@ class TokenDynamic extends LSActiveRecord
                 'type'=>'raw',
                 'value'=>'$data->validfromFormated',
                 'headerHtmlOptions'=>array('class' => 'hidden-xs'),
-                'htmlOptions' => array('class' => 'hidden-xs text-center'),
+                'htmlOptions' => array('class' => 'hidden-xs name'),
             ),
             array(
                 'header' => gT('Valid until'),
@@ -742,7 +743,7 @@ class TokenDynamic extends LSActiveRecord
                 'name' => 'validuntil',
                 'value'=>'$data->validuntilFormated',
                 'headerHtmlOptions'=>array('class' => 'hidden-xs'),
-                'htmlOptions' => array('class' => 'hidden-xs'),
+                'htmlOptions' => array('class' => 'hidden-xs name'),
             ),
         );
     }
@@ -767,7 +768,6 @@ class TokenDynamic extends LSActiveRecord
                 'htmlOptions' => array('class' => 'hidden-xs'),
             );
         }
-
 
         return array_merge($this->standardColsForGrid, $aCustomAttributesCols);
     }
@@ -964,7 +964,7 @@ class TokenDynamic extends LSActiveRecord
           );
       }
 
-      $criteria = new CDbCriteria;
+      $criteria = new LSDbCriteria;
       $criteria->compare('tid',$this->tid,false);
       $criteria->compare('token',$this->token,true);
       $criteria->compare('firstname',$this->firstname,true);
@@ -978,8 +978,21 @@ class TokenDynamic extends LSActiveRecord
       $criteria->compare('remindercount',$this->remindercount,false);
       $criteria->compare('completed',$this->completed,true);
       $criteria->compare('usesleft',$this->usesleft,false);
-      $criteria->compare('validfrom',$this->validfrom,true);
-      $criteria->compare('validuntil',$this->validuntil,true);
+
+      $dateformatdetails = getDateFormatData(Yii::app()->session['dateformat']);
+      if ($this->validfrom)
+      {
+          $s = DateTime::createFromFormat($dateformatdetails['phpdate'] . ' H:i', $this->validfrom);
+          $s2 = $s->format('Y-m-d H:i');
+          $criteria->addCondition('validfrom <= \'' . $s2 . '\'');
+      }
+
+      if ($this->validuntil)
+      {
+          $s = DateTime::createFromFormat($dateformatdetails['phpdate'] . ' H:i', $this->validuntil);
+          $s2 = $s->format('Y-m-d H:i');
+          $criteria->addCondition('validuntil >= \'' . $s2 . '\'');
+      }
 
       foreach($this->custom_attributes as $sColName => $oColumn)
       {

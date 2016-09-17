@@ -4852,8 +4852,6 @@ function do_array($ia)
     $qquery                  = "SELECT other FROM {{questions}} WHERE qid={$ia[0]} AND language='".$_SESSION['survey_'.Yii::app()->getConfig('surveyID')]['s_lang']."'";
     $other                   = Yii::app()->db->createCommand($qquery)->queryScalar(); //Checked
     $aQuestionAttributes     = QuestionAttribute::model()->getQuestionAttributes($ia[0]);
-    $answerwidth             = (trim($aQuestionAttributes['answer_width'])!='')?$aQuestionAttributes['answer_width']:20;
-    $columnswidth            = 100-$answerwidth;
 
     if ($aQuestionAttributes['use_dropdown'] == 1)
     {
@@ -4886,6 +4884,8 @@ function do_array($ia)
     // No-dropdown layout
     if ($useDropdownLayout === false && count($lresult) > 0)
     {
+        $answerwidth             = (trim($aQuestionAttributes['answer_width'])!='')?$aQuestionAttributes['answer_width']:20;
+        $columnswidth            = 100-$answerwidth;
         $sQuery = "SELECT count(qid) FROM {{questions}} WHERE parent_qid={$ia[0]} AND question like '%|%' ";
         $iCount = Yii::app()->db->createCommand($sQuery)->queryScalar();
 
@@ -4977,7 +4977,6 @@ function do_array($ia)
             $myfname        = $ia[1].$ansrow['title'];
             $answertext     = $ansrow['question'];
             $answertext     = (strpos($answertext,'|') !== false) ? substr($answertext,0, strpos($answertext,'|')) : $answertext;
-            $answerwidth    = (strpos($answertext,'|') !== false) ? $answerwidth/2 : $answerwidth;
             $answertextsave = $answertext;
 
             if ($right_exists && strpos($ansrow['question'], '|') !== false)
@@ -5061,7 +5060,7 @@ function do_array($ia)
         $sColumns = '';
         foreach ($labelans as $c)
         {
-            $odd_even .= alternation($odd_even);
+            $odd_even = alternation($odd_even);
             $sColumns .=  doRender('/survey/questions/arrays/array/no_dropdown/columns/col', array(
                 'class'     => $odd_even,
                 'cellwidth' => $cellwidth,
@@ -5073,7 +5072,7 @@ function do_array($ia)
             $odd_even = alternation($odd_even);
             $sColumns .=  doRender('/survey/questions/arrays/array/no_dropdown/columns/col', array(
                 'class'     => 'answertextright '.$odd_even,
-                'cellwidth' => $cellwidth,
+                'cellwidth' => $answerwidth,
             ), true);
         }
 
@@ -5099,6 +5098,8 @@ function do_array($ia)
     // Dropdown layout
     elseif ($useDropdownLayout === true && count($lresult)> 0)
     {
+        $answerwidth             = (trim($aQuestionAttributes['answer_width'])!='')?$aQuestionAttributes['answer_width']:50;
+        $columnswidth            = 100-$answerwidth;
         foreach($lresult as $lrow)
         {
             $labels[]=array(
@@ -5144,8 +5145,6 @@ function do_array($ia)
             ++$numrows;
         }
 
-        $cellwidth    = round( ($columnswidth / $numrows ) , 1 );
-
         $trbc = '';
         $inputnames=array();
 
@@ -5155,7 +5154,6 @@ function do_array($ia)
             $myfname        = $ia[1].$ansrow['title'];
             $answertext     = $ansrow['question'];
             $answertext     = (strpos($answertext,'|') !== false) ? substr($answertext,0, strpos($answertext,'|')):$answertext;
-            $answerwidth    = (strpos($answertext,'|') !== false) ? $answerwidth/2:$answerwidth;
             $error          = (in_array($myfname, $aMandatoryViolationSubQ))?true:false;             /* Check the mandatory sub Q violation */
             $value          = (isset($_SESSION['survey_'.Yii::app()->getConfig('surveyID')][$myfname]))? $_SESSION['survey_'.Yii::app()->getConfig('surveyID')][$myfname] : '';
             $sDisplayStyle  = return_display_style($ia, $aQuestionAttributes, $thissurvey, $myfname);
@@ -5206,6 +5204,9 @@ function do_array($ia)
         (
             'extraclass' => $extraclass,
             'sRows'      => $sRows,
+            'answerwidth'=> $answerwidth,
+            'columnswidth'=> $columnswidth,
+            'right_exists'=> $right_exists,
         ),  true);
 
     }
