@@ -396,6 +396,7 @@ class Statistics_userController extends LSYii_Controller {
                 case "T": // Long free text
                 case "U": // Huge free text
                 case "S": // Short free text
+                case "9": // GeoPoint
                     $myfield="T$myfield";
                     $allfields[] = $myfield;
                     break;
