@@ -824,7 +824,7 @@ class Question extends LSActiveRecord
     {
         if ($this->type != "X"  && $this->type != "|")
         {
-            $sIcon = ($this->other=="Y")?'<span class="fa fa-asterisk text-danger"></span>':'<span></span>';
+            $sIcon = ($this->mandatory=="Y")?'<span class="fa fa-asterisk text-danger"></span>':'<span></span>';
         }
         else
         {
@@ -835,7 +835,7 @@ class Question extends LSActiveRecord
 
     public function getOtherIcon()
     {
-        //return $this->mandatory;
+
         if (( $this->type == "L") || ($this->type == "!") || ($this->type == "P") || ($this->type=="M"))
         {
             $sIcon = ($this->other==="Y")?'<span class="fa fa-dot-circle-o"></span>':'<span></span>';
