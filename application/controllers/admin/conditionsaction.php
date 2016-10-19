@@ -127,9 +127,9 @@ class conditionsaction extends Survey_Common_Action {
                 break;
         }
 
-
-        if (!empty($request->getPost('subaction'))) {
-            $subaction = $request->getPost('subaction');
+        $postSubaction = $request->getPost('subaction');
+        if (!empty($postSubaction)) {
+            $subaction = $postSubaction;
         }
 
         //BEGIN Sanitizing POSTed data
@@ -172,8 +172,9 @@ class conditionsaction extends Survey_Common_Action {
             $p_method = null;
         }
 
-        if (!empty($request->getPost('newscenarionum'))) {
-            $p_newscenarionum = sanitize_int($request->getPost('newscenarionum'));
+        $postNewScenarioNum = $request->getPost('newscenarionum');
+        if (!empty($postNewScenarioNum)) {
+            $p_newscenarionum = sanitize_int($postNewScenarioNum);
         }
         else {
             $p_newscenarionum = null;
@@ -295,6 +296,19 @@ class conditionsaction extends Survey_Common_Action {
         $aData['conditionsoutput_action_error'] = $conditionsoutput_action_error;
         $aData['javascriptpre'] = $javascriptpre;
 
+        $scenarios = $this->getAllScenarios($qid);
+
+        // Some extra args to getEditConditionForm
+        $args['subaction'] = $subaction;
+        $args['iSurveyID'] = $this->iSurveyID;
+        $args['gid'] = $gid;
+        $args['qcount'] = $this->getQCount($cquestions);
+        $args['method'] = $method;
+        $args['cquestions'] = $cquestions;
+        $args['scenariocount'] = count($scenarios);
+
+        $aData['quickAddConditionForm'] = $this->getQuickAddConditionForm($args);
+
         $aViewUrls['conditionshead_view'][] = $aData;
 
         $conditionsList = array();
@@ -316,7 +330,6 @@ class conditionsaction extends Survey_Common_Action {
             $conditionscount = 0;
             $s=0;
 
-            $scenarios = $this->getAllScenarios($qid);
             $scenariocount = count($scenarios);
 
             $aData['conditionsoutput'] = '';
@@ -585,27 +598,6 @@ class conditionsaction extends Survey_Common_Action {
             $aViewUrls['output'] .= $this->getCopyForm($qid, $gid, $conditionsList, $pquestions);
         }
 
-        if (isset($cquestions)) {
-            if ( count($cquestions) > 0 && count($cquestions) <=10) {
-                $qcount = count($cquestions);
-            }
-            else {
-                $qcount = 9;
-            }
-        }
-        else {
-            $qcount = 0;
-        }
-
-        // Some extra args to getEditConditionForm
-        $args['subaction'] = $subaction;
-        $args['iSurveyID'] = $this->iSurveyID;
-        $args['gid'] = $gid;
-        $args['qcount'] = $qcount;
-        $args['method'] = $method;
-        $args['cquestions'] = $cquestions;
-        $args['scenariocount'] = $scenariocount;
-
         if (   $subaction == "editconditionsform"
             || $subaction == "insertcondition"
             || $subaction == "updatecondition"
@@ -690,7 +682,8 @@ class conditionsaction extends Survey_Common_Action {
     protected function resetSurveyLogic($iSurveyID)
     {
         $request = Yii::app()->request;
-        if (empty($request->get('ok'))) {
+        $postOk = $request->getQuery('ok');
+        if (empty($postOk)) {
             $data = array('iSurveyID' => $iSurveyID);
             $content = $this->getController()->renderPartial('/admin/conditions/deleteAllConditions', $data, true);
             $this->_renderWrappedTemplate('conditions', array('message' => array(
@@ -1463,7 +1456,7 @@ class conditionsaction extends Survey_Common_Action {
                 $acount = count($aresult);
                 foreach ($aresult as $arow)
                 {
-                    $theanswer = addcslashes($arow['answer'], "'");
+                    $theanswer = $arow['answer'];
                     $quicky[]=array($arow['code'], $theanswer);
                 }
                 for ($i=1; $i<=$acount; $i++)
@@ -1494,7 +1487,7 @@ class conditionsaction extends Survey_Common_Action {
 
                 foreach ($aresult as $arows)
                 {
-                    $theanswer = addcslashes($arows['question'], "'");
+                    $theanswer = $arows['question'];
                     $canswers[]=array($rows['sid'].$X.$rows['gid'].$X.$rows['qid'], $arows['title'], $theanswer);
 
                     $shortanswer = "{$arows['title']}: [" . strip_tags($arows['question']) . "]";
@@ -1563,7 +1556,7 @@ class conditionsaction extends Survey_Common_Action {
 
                     foreach ($aresult as $arows)
                     {
-                        $theanswer = addcslashes($arows['answer'], "'");
+                        $theanswer = $arows['answer'];
                         $canswers[]=array($rows['sid'].$X.$rows['gid'].$X.$rows['qid'], $arows['code'], $theanswer);
                     }
                     if ($rows['type'] == "D")
@@ -1639,7 +1632,7 @@ class conditionsaction extends Survey_Common_Action {
     /**
      * Get html for add/edit condition form
      * @param array $args
-     * @return void
+     * @return string
      */
     protected function getEditConditionForm(array $args)
     {
@@ -1703,6 +1696,29 @@ class conditionsaction extends Survey_Common_Action {
             . "</script>\n";
 
         return $result;
+    }
+
+    /**
+     * Form used in quick-add modal
+     * @param array $args
+     */
+    protected function getQuickAddConditionForm(array $args)
+    {
+        extract($args);
+        $data = array(
+            'subaction'     => $subaction,
+            'iSurveyID'     => $iSurveyID,
+            'gid'           => $gid,
+            'qid'           => $qid,
+            'cquestions'    => $cquestions,
+            'p_csrctoken'   => $p_csrctoken,
+            'p_prevquestionsgqa'  => $p_prevquestionsgqa,
+            'tokenFieldsAndNames' => $this->tokenFieldsAndNames,
+            'method'        => $method,
+            'subaction'     => $subaction,
+        );
+        $html = $this->getController()->renderPartial('/admin/conditions/includes/quickAddConditionForm', $data, true);
+        return $html;
     }
 
     /**
@@ -2006,7 +2022,7 @@ class conditionsaction extends Survey_Common_Action {
     }
 
     /**
-     * @param array $extractedTokenAttr
+     * @param string[] $extractedTokenAttr
      * @return string
      */
     protected function getAttributeName($extractedTokenAttr)
@@ -2138,6 +2154,24 @@ class conditionsaction extends Survey_Common_Action {
      */
     protected function shouldShowScenario($subaction, $scenariocount)
     {
-        return (($subaction != "editthiscondition" && ($scenariocount == 1 || $scenariocount==0)) || ($subaction == "editthiscondition"));
+        return $subaction != "editthiscondition" && ($scenariocount == 1 || $scenariocount==0);
+    }
+
+    /**
+     * @param array $cquestions
+     * @return int
+     */
+    protected function getQCount(array $cquestions)
+    {
+        $qcount = 0;
+
+        if ( count($cquestions) > 0 && count($cquestions) <=10) {
+            $qcount = count($cquestions);
+        }
+        else {
+            $qcount = 9;
+        }
+
+        return $qcount;
     }
 }
