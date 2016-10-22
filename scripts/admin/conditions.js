@@ -116,7 +116,7 @@ populateCanswersSelectObject = function() {
     this.cqid              = '#cqid';
     this.conditiontargetId = '#conditiontarget';
     this.methodId          = '#method';
-    this.canswersToSelectId= '#canswersToSelectId';
+    this.canswersToSelectId= '#canswersToSelect';
 
     var that = this;
 
@@ -168,12 +168,11 @@ populateCanswersSelectObject = function() {
         for (var i=0;i<Keys.length;i++) {
             var optionSelected = false;
             // If we are at page load time, then we may know which option to select
-            if (evt === null)
-            { // Let's read canswersToSelect and check if we should select the option
+            if (evt === null) {
+                // Let's read canswersToSelect and check if we should select the option
                 var selectedOptions = $(that.canswersToSelectId).val().split(';');
                 for (var j=0;j<selectedOptions.length;j++) {
-                    if (Codes[Keys[i]] == selectedOptions[j])
-                    {
+                    if (Codes[Keys[i]] == selectedOptions[j]) {
                         optionSelected = true;
                     }
                 }
@@ -213,6 +212,35 @@ function selectTabFromOper() {
 	}
 }
 
+/**
+ * Same as selectTabFromOper but for quick-add modal
+ */
+function quickAddSelectTabFromOper() {
+	var val = $('#quick-add-method').val();
+	if(val == 'RX') {
+        $('a[href="#QUICKADD-CANSWERSTAB"]').parent().addClass('disabled');
+        $('a[href="#QUICKADD-CONST"]').parent().addClass('disabled');
+        $('a[href="#QUICKADD-PREVQUESTIONS"]').parent().addClass('disabled');
+        $('a[href="#QUICKADD-TOKENATTRS"]').parent().addClass('disabled');
+        $('a[href="#QUICKADD-REGEXP"]').parent().removeClass('disabled');
+        $('a[href="#QUICKADD-REGEXP"]').trigger('click');
+	}
+	else {
+		//if (!isAnonymousSurvey) $('#conditiontarget').bootTabs('enable', 3);
+
+        $('a[href="#QUICKADD-CANSWERSTAB"]').parent().removeClass('disabled');
+        $('a[href="#QUICKADD-CONST"]').parent().removeClass('disabled');
+        $('a[href="#QUICKADD-PREVQUESTIONS"]').parent().removeClass('disabled');
+        $('a[href="#QUICKADD-TOKENATTRS"]').parent().removeClass('disabled');
+        $('a[href="#QUICKADD-REGEXP"]').parent().addClass('disabled');
+
+        // If regexp tab is selected, trigger click on first tab instead
+        if ($('a[href="#QUICKADD-REGEXP"]').parent().hasClass('active')) {
+            $('a[href="#QUICKADD-CANSWERSTAB"]').trigger('click');
+        }
+	}
+}
+
 $(document).ready(function() {
 
 	$('#resetForm').click( function() {
@@ -226,6 +254,7 @@ $(document).ready(function() {
 
 	// Select the condition target Tab depending on operator
 	$('#method').change(selectTabFromOper);
+	$('#quick-add-method').change(quickAddSelectTabFromOper);
 
     var p = new populateCanswersSelectObject();
     populateCanswersSelect = p.fun;
@@ -263,6 +292,18 @@ $(document).ready(function() {
     $('a[href="' + editTargetTab + '"]').trigger('click');
     $('a[href="' + editSourceTab + '"]').trigger('click');
 
+    // When user clicks tab, update hidden input
+    $('#editconditions .src-tab').on('click', function(e) {
+        var href = $(e.currentTarget).find('a').attr('href');
+        $('input[name="editSourceTab"]').val(href);
+    });
+
+    // When user clicks tab, update hidden input
+    $('#editconditions .target-tab').on('click', function(e) {
+        var href = $(e.currentTarget).find('a').attr('href');
+        $('input[name="editTargetTab"]').val(href);
+    });
+
     // Tab management for quick-add modal
     var editTargetTab = $('input[name="quick-add-editTargetTab"]').val();
     var editSourceTab = $('input[name="quick-add-editSourceTab"]').val();
@@ -270,15 +311,15 @@ $(document).ready(function() {
     $('a[href="' + editSourceTab + '"]').trigger('click');
 
     // When user clicks tab, update hidden input
-    $('.src-tab').on('click', function(e) {
+    $('#quick-add-conditions-form .src-tab').on('click', function(e) {
         var href = $(e.currentTarget).find('a').attr('href');
-        $('input[name="editSourceTab"]').val(href);
+        $('input[name="quick-add-editSourceTab"]').val(href);
     });
 
     // When user clicks tab, update hidden input
-    $('.target-tab').on('click', function(e) {
+    $('#quick-add-conditions-form .target-tab').on('click', function(e) {
         var href = $(e.currentTarget).find('a').attr('href');
-        $('input[name="editTargetTab"]').val(href);
+        $('input[name="quick-add-editTargetTab"]').val(href);
     });
 
     // Disable clicks on disabled tabs (regexp)
@@ -289,6 +330,42 @@ $(document).ready(function() {
         }
     });
 
+    // Bind save-buttons in quick-add modal
+    $('#quick-add-condition-save-button').on('click', function(ev) {
+        var formData = $('#quick-add-conditions-form').serializeArray();
+        var url = $('#quick-add-url').html();
+        console.log('formData', formData);
+        LS.ajax({
+            url: url,
+            data: formData,
+            method: 'POST',
+            error: function () {
+                console.log(arguments);
+            }
+        });
+    });
+
+    // Save-and-close for quick-add modal
+    $('#quick-add-condition-save-and-close-button').on('click', function(ev) {
+        var formData = $('#quick-add-conditions-form').serializeArray();
+        var url = $('#quick-add-url').html();
+        LS.ajax({
+            url: url,
+            data: formData,
+            method: 'POST',
+            success: function () {
+                location.reload();
+            },
+            error: function () {
+                console.log(arguments);
+            }
+        });
+    });
+
+    // Close for quick-add modal
+    $('#quick-add-condition-close-button').on('click', function(ev) {
+        location.reload();
+    });
 });
 
 /**
@@ -300,4 +377,15 @@ function scenarioaddbtnOnClickAction() {
     $('#defaultscenariotxt').hide('slow');
     $('.add-scenario-column').removeClass('col-sm-4').addClass('col-sm-2');
     $('#scenario').show('slow');
+}
+
+/**
+ * Redirects to url
+ * Button in scenario to add a condition for this scenario (prefill scenario number)
+ * @param {string} url
+ * @return
+ */
+function addConditionToScenario(url) {
+    location = url + '#formHeader';
+    return false;
 }

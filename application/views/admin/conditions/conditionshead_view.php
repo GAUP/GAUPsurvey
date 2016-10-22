@@ -40,6 +40,8 @@
             class='btn btn-default pull-right condition-header-button'
             data-toggle='modal'
             data-target='#quick-add-condition-modal'
+            data-tooltip='true'
+            data-title='<?php eT('Add multiple conditions without a page reload'); ?>'
         >
             <span class="fa fa-plus-circle"></span>
             &nbsp;
@@ -63,12 +65,14 @@
                 <h4 class="modal-title"><?php eT('Quick-add conditions'); ?></h4>
             </div>
             <div class="modal-body">
+                <!-- Condition form is in file quickAddConditionForm.php -->
                 <?php echo $quickAddConditionForm; ?>
             </div>
             <div class="modal-footer">
-                <button type='submit' class='btn btn-primary'><?php eT('Save'); ?></button>
-                <button type='submit' class='btn btn-default'><?php eT('Save and close'); ?></button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">&nbsp;<?php eT("Close"); ?></button>
+                <button type='submit' id='quick-add-condition-save-button' class='btn btn-primary'><?php eT('Save'); ?></button>
+                <button type='submit' id='quick-add-condition-save-and-close-button' class='btn btn-default'><?php eT('Save and close'); ?></button>
+                <button type="button" id='quick-add-condition-close-button' class="btn btn-danger" data-dismiss="modal">&nbsp;<?php eT("Close"); ?></button>
+                <span id='quick-add-url' class='hidden'><?php echo $quickAddConditionURL; ?></span>
             </div>
         </div>
     </div>
