@@ -1697,6 +1697,7 @@ function validateEmailAddresses($aEmailAddressList){
                 case "U": // Huge free text
                 case "S": // Short free text
                 case "9": // GeoPoint
+                case "9": // GeoShape
                     $myfield="T$myfield";
                     $allfields[] = $myfield;
                     break;

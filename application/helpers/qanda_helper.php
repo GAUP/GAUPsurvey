@@ -246,6 +246,10 @@ function retrieveAnswers($ia)
             $values=do_shortfreetext($ia);
             break;
 
+        case '8': //GeoShape
+            $values=do_geoshape($ia);
+            break;
+
         case '9': //GeoPoint
             $values=do_geopoint($ia);
             break;
@@ -3942,15 +3946,15 @@ function do_geopoint($ia)
         Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."map9.js");
         Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'map9.css');
         Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."singleclick.js");
-        if ($aQuestionAttributes['location_homebutton'] == 1)
-        {
+        // if ($aQuestionAttributes['location_homebutton'] == 1)
+        // {
           Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.zoomhome.js");
           Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'leaflet.zoomhome.css');
-        }
-        if ($aQuestionAttributes['location_geojson'] <> '')
-        {
+        // }
+        // if ($aQuestionAttributes['location_geojson'] <> '')
+        // {
           Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.snogylop.js");
-        }
+        // }
 
 
         if (isset($aQuestionAttributes['hide_tip']) && $aQuestionAttributes['hide_tip']==0)
@@ -4015,6 +4019,356 @@ function do_geopoint($ia)
 
 }
 
+// ---------------------------------------------------------------
+function do_geoshape($ia)
+{
+    global $thissurvey;
+
+    $sGoogleMapsAPIKey  = trim(Yii::app()->getConfig("googleMapsAPIKey"));
+
+    if ($sGoogleMapsAPIKey!='')
+    {
+        $sGoogleMapsAPIKey = '&key='.$sGoogleMapsAPIKey;
+    }
+
+    $extraclass ="";
+    $aQuestionAttributes = QuestionAttribute::model()->getQuestionAttributes($ia[0]);
+
+    // if ($aQuestionAttributes['numbers_only']==1)
+    // {
+    //     $sSeparator             = getRadixPointData($thissurvey['surveyls_numberformat']);
+    //     $sSeparator             = $sSeparator['separator'];
+    //     $extraclass            .= " numberonly";
+    //     $checkconditionFunction = "fixnum_checkconditions";
+    // }
+    // else
+    // {
+        $checkconditionFunction = "checkconditions";
+    // }
+    if (intval(trim($aQuestionAttributes['maximum_chars']))>0)
+    {
+        // Only maxlength attribute, use textarea[maxlength] jquery selector for textarea
+        $maximum_chars  = intval(trim($aQuestionAttributes['maximum_chars']));
+        $maxlength      = "maxlength='{$maximum_chars}' ";
+        $extraclass    .=" maxchars maxchars-".$maximum_chars;
+    }
+    else
+    {
+        $maxlength  = "";
+    }
+
+    // if (trim($aQuestionAttributes['text_input_width'])!='')
+    // {
+    //     $tiwidth     = $aQuestionAttributes['text_input_width'];
+    //     $extraclass .= " inputwidth-".trim($aQuestionAttributes['text_input_width']);
+    //     $col         = ($aQuestionAttributes['text_input_width']<=12)?$aQuestionAttributes['text_input_width']:12;
+    //     $extraclass .= " col-sm-".trim($col);
+    // }
+    // else
+    // {
+        $tiwidth = 50;
+    // }
+    if (trim($aQuestionAttributes['prefix'][$_SESSION['survey_'.Yii::app()->getConfig('surveyID')]['s_lang']])!='')
+    {
+        $prefix      = $aQuestionAttributes['prefix'][$_SESSION['survey_'.Yii::app()->getConfig('surveyID')]['s_lang']];
+        $extraclass .= " withprefix";
+    }
+    else
+    {
+        $prefix = '';
+    }
+    if (trim($aQuestionAttributes['suffix'][$_SESSION['survey_'.Yii::app()->getConfig('surveyID')]['s_lang']])!='')
+    {
+        $suffix      = $aQuestionAttributes['suffix'][$_SESSION['survey_'.Yii::app()->getConfig('surveyID')]['s_lang']];
+        $extraclass .= " withsuffix";
+    }
+    else
+    {
+        $suffix = '';
+    }
+    if ($thissurvey['nokeyboard']=='Y')
+    {
+        includeKeypad();
+        $kpclass     = "text-keypad";
+        $extraclass .= " inputkeypad";
+    }
+    else
+    {
+        $kpclass = "";
+    }
+
+    $answer = "";
+
+    // if (trim($aQuestionAttributes['display_rows'])!='')
+    // {
+    //     //question attribute "display_rows" is set -> we need a textarea to be able to show several rows
+    //     $drows = $aQuestionAttributes['display_rows'];
+    //
+    //     //if a textarea should be displayed we make it equal width to the long text question
+    //     //this looks nicer and more continuous
+    //     if($tiwidth == 50)
+    //     {
+    //         $tiwidth = 40;
+    //     }
+    //     $dispVal = "";
+    //
+    //     if ($_SESSION['survey_'.Yii::app()->getConfig('surveyID')][$ia[1]])
+    //     {
+    //         $dispVal = str_replace("\\", "", $_SESSION['survey_'.Yii::app()->getConfig('surveyID')][$ia[1]]);
+    //
+    //         if ($aQuestionAttributes['numbers_only']==1)
+    //         {
+    //             $dispVal = str_replace('.',$sSeparator,$dispVal);
+    //         }
+    //         $dispVal = htmlspecialchars($dispVal);
+    //     }
+    //
+    //     $answer .= doRender('/survey/questions/shortfreetext/textarea/item', array(
+    //         'extraclass'             => $extraclass,
+    //         'freeTextId'             => 'answer'.$ia[1],
+    //         'labelText'              => gT('Your answer'),
+    //         'name'                   => $ia[1],
+    //         'drows'                  => $drows,
+    //         'tiwidth'                => $tiwidth,
+    //         'checkconditionFunction' => $checkconditionFunction.'(this.value, this.name, this.type)',
+    //         'dispVal'                => $dispVal,
+    //         'maxlength'              => $maxlength,
+    //         'kpclass'                => $kpclass,
+    //         'prefix'                 => $prefix,
+    //         'suffix'                 => $suffix,
+    //         'sm_col'                 => decide_sm_col($prefix, $suffix)
+    //     ), true);
+    // }
+    // elseif((int)($aQuestionAttributes['location_mapservice'])==1)
+    if((int)($aQuestionAttributes['location_mapservice'])==1)
+    {
+        $mapservice      = $aQuestionAttributes['location_mapservice'];
+        $currentLocation = $_SESSION['survey_'.Yii::app()->getConfig('surveyID')][$ia[1]];
+        $currentLatLong  = null;
+        $floatLat        = 0;
+        $floatLng        = 0;
+
+        // Get the latitude/longtitude for the point that needs to be displayed by default
+        if (strlen($currentLocation) > 2)
+        {
+            $currentLatLong = explode(';',$currentLocation);
+            $currentLatLong = array($currentLatLong[0],$currentLatLong[1]);
+        }
+        else
+        {
+            // if ((int)($aQuestionAttributes['location_nodefaultfromip'])==0)
+            // {
+            //     $currentLatLong = getLatLongFromIp(getIPAddress());
+            // }
+
+            if (!isset($currentLatLong) || $currentLatLong==false)
+            {
+                $floatLat = 0;
+                $floatLng = 0;
+                $LatLong  = explode(" ",trim($aQuestionAttributes['location_defaultcoordinates']));
+
+                if (isset($LatLong[0]) && isset($LatLong[1]))
+                {
+                    $floatLat = $LatLong[0];
+                    $floatLng = $LatLong[1];
+                }
+
+                $currentLatLong = array($floatLat,$floatLng);
+            }
+        }
+        // 2 - city; 3 - state; 4 - country; 5 - postal
+        $strBuild = "";
+        // if ($aQuestionAttributes['location_city'])
+        //     $strBuild .= "2";
+        // if ($aQuestionAttributes['location_state'])
+        //     $strBuild .= "3";
+        // if ($aQuestionAttributes['location_country'])
+        //     $strBuild .= "4";
+        // if ($aQuestionAttributes['location_postal'])
+        //     $strBuild .= "5";
+
+        $currentLocation = $currentLatLong[0] . " " . $currentLatLong[1];
+
+        Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."map9.js");
+        if ($aQuestionAttributes['location_mapservice']==1 && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off")
+            Yii::app()->getClientScript()->registerScriptFile("https://maps.googleapis.com/maps/api/js?sensor=false$sGoogleMapsAPIKey");
+        else if ($aQuestionAttributes['location_mapservice']==1)
+            Yii::app()->getClientScript()->registerScriptFile("http://maps.googleapis.com/maps/api/js?sensor=false$sGoogleMapsAPIKey");
+        elseif ($aQuestionAttributes['location_mapservice']==2)
+            Yii::app()->getClientScript()->registerScriptFile("http://www.openlayers.org/api/OpenLayers.js");
+
+        $questionHelp = false;
+        if (isset($aQuestionAttributes['hide_tip']) && $aQuestionAttributes['hide_tip']==0)
+        {
+            $questionHelp = true;
+            $question_text['help'] = gT('Drag and drop the pin to the desired location. You may also right click on the map to move the pin.');
+        }
+
+        $answer = doRender('/survey/questions/shortfreetext/location_mapservice/item', array(
+            'extraclass'             => $extraclass,
+            'freeTextId'             => 'answer'.$ia[1],
+            'labelText'              => gT('Your answer'),
+            'name'                   => $ia[1],
+            'checkconditionFunction' => $checkconditionFunction.'(this.value, this.name, this.type)',
+            'value'                  => $_SESSION['survey_'.Yii::app()->getConfig('surveyID')][$ia[1]],
+            'kpclass'                => $kpclass,
+            'currentLocation'        => $currentLocation,
+            'strBuild'               => $strBuild,
+            'location_mapservice'    => $aQuestionAttributes['location_mapservice'],
+            'location_mapzoom'       => $aQuestionAttributes['location_mapzoom'],
+            'location_mapheight'     => $aQuestionAttributes['location_mapheight'],
+            'questionHelp'           => $questionHelp,
+            'question_text_help'     => (isset( $question_text ))? $question_text['help']:'',
+            'sm_col'                 => decide_sm_col($prefix, $suffix)
+        ), true);
+
+    }
+    elseif((int)($aQuestionAttributes['location_mapservice'])==100)
+    {
+        $currentLocation = $_SESSION['survey_'.Yii::app()->getConfig('surveyID')][$ia[1]];
+        $currentCenter   = $currentLatLong = null;
+
+        // Get the latitude/longtitude for the point that needs to be displayed by default
+        if (strlen($currentLocation) > 2 && strpos($currentLocation,";"))
+        {
+            $currentLatLong = explode(';',$currentLocation);
+            $currentCenter  = $currentLatLong = array($currentLatLong[0],$currentLatLong[1]);
+        }
+        // elseif ((int)($aQuestionAttributes['location_nodefaultfromip'])==0)
+        // {
+        //     $currentCenter = $currentLatLong = getLatLongFromIp(getIPAddress());
+        // }
+
+        // If it's not set : set the center to the default position, but don't set the marker
+        if (!$currentLatLong)
+        {
+            $currentLatLong = array("","");
+            $currentCenter = explode(" ",trim($aQuestionAttributes['location_defaultcoordinates']));
+            if (count($currentCenter)!=2)
+            {
+                $currentCenter = array("","");
+            }
+        }
+        $strBuild = "";
+
+        $mapMaxBounds = explode(" ",trim($aQuestionAttributes['location_maxbounds']));
+        if (count($mapMaxBounds)!=4)
+        {
+            $mapMaxBounds = array("-90", "-180", "90", "180");
+        }
+
+        $aGlobalMapScriptVar= array(
+            'geonameUser'=>getGlobalSetting('GeoNamesUsername'),// Did we need to urlencode ?
+            'geonameLang'=>Yii::app()->language,
+            );
+        $aThisMapScriptVar=array(
+            'zoomLevel'=>$aQuestionAttributes['location_mapzoom'],
+            'latitude'=>$currentCenter[0],
+            'longitude'=>$currentCenter[1],
+            'minZoomLevel'=>$aQuestionAttributes['location_mapzoommin'],
+            'maxZoomLevel'=>$aQuestionAttributes['location_mapzoommax'],
+            'maxBounds0'=>$mapMaxBounds[0],
+            'maxBounds1'=>$mapMaxBounds[1],
+            'maxBounds2'=>$mapMaxBounds[2],
+            'maxBounds3'=>$mapMaxBounds[3],
+            'homeButton'=>$aQuestionAttributes['location_homebutton'],
+            'geojson'=>$aQuestionAttributes['location_geojson'],
+            'allow_polygon'=>$aQuestionAttributes['location_polygon'],
+            'allow_polyline'=>$aQuestionAttributes['location_polyline'],
+            'allow_rectangle'=>$aQuestionAttributes['location_rectangle'],
+            'allow_edit_features'=>$aQuestionAttributes['location_edit_features'],
+        );
+
+        if (($aQuestionAttributes['location_polygon'] == 1) ||
+            ($aQuestionAttributes['location_polyline'] == 1) ||
+            ($aQuestionAttributes['location_rectangle'] == 1) ||
+            ($aQuestionAttributes['location_edit_features'] == 1)
+        ) {
+          Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet72.js");
+          Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'leaflet72.css');
+          Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.toolbar-src.js");
+          Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'leaflet.toolbar.css');
+          Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.draw-src.js");
+          Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'leaflet.draw.css');
+        } else {
+          App()->getClientScript()->registerPackage('leaflet');
+        }
+        Yii::app()->getClientScript()->registerScript('sGlobalMapScriptVar',"LSmap=".ls_json_encode($aGlobalMapScriptVar).";\nLSmaps= new Array();",CClientScript::POS_HEAD);
+        Yii::app()->getClientScript()->registerScript('sThisMapScriptVar'.$ia[1],"LSmaps['{$ia[1]}']=".ls_json_encode($aThisMapScriptVar),CClientScript::POS_HEAD);
+        Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."map8.js");
+        Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'map8.css');
+        Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."singleclick.js");
+        // if ($aQuestionAttributes['location_homebutton'] == 1)
+        // {
+          Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.zoomhome.js");
+          Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'leaflet.zoomhome.css');
+        // }
+        // if ($aQuestionAttributes['location_geojson'] <> '')
+        // {
+          Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.snogylop.js");
+        // }
+
+        if (isset($aQuestionAttributes['hide_tip']) && $aQuestionAttributes['hide_tip']==0)
+        {
+            $questionHelp = true;
+            $question_text['help'] = gT('Click to set the location or drag and drop the pin. You may may also enter coordinates');
+        }
+
+        $itemDatas = array(
+            'extraclass'=>$extraclass,
+            'name'=>$ia[1],
+            'checkconditionFunction'=>$checkconditionFunction.'(this.value, this.name, this.type)',
+            'value'=>$_SESSION['survey_'.Yii::app()->getConfig('surveyID')][$ia[1]],
+            'strBuild'=>$strBuild,
+            'location_mapservice'=>$aQuestionAttributes['location_mapservice'],
+            'location_mapzoom'=>$aQuestionAttributes['location_mapzoom'],
+            'location_mapheight'=>$aQuestionAttributes['location_mapheight'],
+            'location_mapwidth'=>$aQuestionAttributes['location_mapwidth'],
+            'location_showgeosearch'=>$aQuestionAttributes['location_showgeosearch'],
+            'questionHelp'=>(isset($questionHelp))?$questionHelp:'',
+            'question_text_help'=>(isset($question_text['help']))?$question_text['help']:'',
+            'location_value'=> $currentLatLong[0].' '.$currentLatLong[1],
+            'currentLat'=>$currentLatLong[0],
+            'currentLong'=>$currentLatLong[1],
+        );
+        $answer = doRender('/survey/questions/geoshape/location_mapservice/item_100', $itemDatas, true);
+    }
+    else
+    {
+        //no question attribute set, use common input text field
+        $dispVal = $_SESSION['survey_'.Yii::app()->getConfig('surveyID')][$ia[1]];
+        if ($aQuestionAttributes['numbers_only']==1)
+        {
+            $dispVal = str_replace('.',$sSeparator,$dispVal);
+        }
+        $dispVal = htmlspecialchars($dispVal,ENT_QUOTES,'UTF-8');
+
+        $itemDatas = array(
+            'extraclass'=>$extraclass,
+            'name'=>$ia[1],
+            'checkconditionFunction'=>$checkconditionFunction.'(this.value, this.name, this.type)',
+            'prefix'=>$prefix,
+            'suffix'=>$suffix,
+            'kpclass'=>$kpclass,
+            'tiwidth'=>$tiwidth,
+            'dispVal'=>$dispVal,
+            'maxlength'=>$maxlength,
+            'sm_col' => decide_sm_col($prefix, $suffix)
+        );
+        $answer = doRender('/survey/questions/shortfreetext/text/item', $itemDatas, true);
+
+    }
+
+    if (trim($aQuestionAttributes['time_limit'])!='')
+    {
+        $answer .= return_timer_script($aQuestionAttributes, $ia, "answer".$ia[1]);
+    }
+
+    $inputnames = array();
+    $inputnames[]=$ia[1];
+    return array($answer, $inputnames);
+
+}
 
 // ---------------------------------------------------------------
 function do_longfreetext($ia)

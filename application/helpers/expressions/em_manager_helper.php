@@ -2882,6 +2882,8 @@
                                 case ';': //ARRAY (Multi Flexi) Text
                                 case ':': //ARRAY (Multi Flexi) 1 to 10
                                 case 'S': //SHORT FREE TEXT
+                                case '9': //GeoPoint
+                                case '8': //GeoShape
                                 case 'T': //LONG FREE TEXT
                                 case 'U': //HUGE FREE TEXT
                                     if ($this->sgqaNaming)
@@ -2983,6 +2985,8 @@
                                 case 'P': //Multiple choice with comments checkbox + text
                                 case 'R': //RANKING STYLE
                                 case 'S': //SHORT FREE TEXT
+                                case '9': //GeoPoint
+                                case '8': //GeoShape
                                 case 'T': //LONG FREE TEXT
                                 case 'U': //HUGE FREE TEXT
                                 case 'D': //DATE
@@ -3051,6 +3055,8 @@
                                 case ':': //ARRAY (Multi Flexi) 1 to 10
                                 case 'N': //NUMERICAL QUESTION TYPE
                                 case 'S': //SHORT FREE TEXT
+                                case '9': //GeoPoint
+                                case '8': //GeoShape
                                 case 'T': //LONG FREE TEXT
                                 case 'U': //HUGE FREE TEXT
                                     if ($this->sgqaNaming)
@@ -3073,6 +3079,8 @@
                                 case ':': //ARRAY (Multi Flexi) 1 to 10
                                 case 'N': //NUMERICAL QUESTION TYPE
                                 case 'S': //SHORT FREE TEXT
+                                case '9': //GeoPoint
+                                case '8': //GeoShape
                                 case 'T': //LONG FREE TEXT
                                 case 'U': //HUGE FREE TEXT
                                     if ($this->sgqaNaming)
@@ -3761,6 +3769,8 @@
                     case 'Q': //MULTIPLE SHORT TEXT
                     case ';': //ARRAY (Multi Flexi) Text
                     case 'S': //SHORT FREE TEXT
+                    case '9': //GeoPoint
+                    case '8': //GeoShape
                     case 'T': //LONG FREE TEXT
                     case 'U': //HUGE FREE TEXT
                     case 'M': //Multiple choice checkbox
@@ -3815,6 +3825,8 @@
                     case 'N': //NUMERICAL QUESTION TYPE
                     case 'O': //LIST WITH COMMENT drop-down/radio-button list + textarea
                     case 'S': //SHORT FREE TEXT
+                    case '9': //GeoPoint
+                    case '8': //GeoShape
                     case 'T': //LONG FREE TEXT
                     case 'U': //HUGE FREE TEXT
                     case 'X': //BOILERPLATE QUESTION
@@ -3913,6 +3925,8 @@
                     case 'D': //DATE
                     case 'N': //NUMERICAL QUESTION TYPE
                     case 'S': //SHORT FREE TEXT
+                    case '9': //GeoPoint
+                    case '8': //GeoShape
                     case 'T': //LONG FREE TEXT
                     case 'U': //HUGE FREE TEXT
                     case 'Q': //MULTIPLE SHORT TEXT
@@ -8815,6 +8829,8 @@ EOD;
                                 case 'Q': //MULTIPLE SHORT TEXT
                                 case ';': //ARRAY (Multi Flexi) Text
                                 case 'S': //SHORT FREE TEXT
+                                case '9': //GeoPoint
+                                case '8': //GeoShape
                                 case 'D': //DATE
                                 case 'T': //LONG FREE TEXT
                                 case 'U': //HUGE FREE TEXT
@@ -8991,6 +9007,7 @@ EOD;
                             case ';': //ARRAY (Multi Flexi) Text
                             case 'S': //SHORT FREE TEXT
                             case '9': //GeoPoint
+                            case '8': //GeoShape
                             case 'T': //LONG FREE TEXT
                             case 'U': //HUGE FREE TEXT
                             case '*': //Equation

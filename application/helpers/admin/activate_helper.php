@@ -299,9 +299,8 @@ function activateSurvey($iSurveyID, $simulate = false)
                 $aTableDefinition[$aRow['fieldname']] = "decimal (30,10)";
                 break;
             case "S":  //SHORT TEXT
-                $aTableDefinition[$aRow['fieldname']] = "text";
-                break;
             case "9":  //GeoPoint
+            case "8":  //GeoShape
                 $aTableDefinition[$aRow['fieldname']] = "text";
                 break;
             case "L":  //LIST (RADIO)

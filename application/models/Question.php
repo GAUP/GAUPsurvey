@@ -581,6 +581,13 @@ class Question extends LSActiveRecord
                 'hasdefaultvalues' => 1,
                 'assessable' => 0,
                 'answerscales' => 0),
+            "8" => array(
+                'description' => gT("GeoShape"),
+                'group' => gT("Text questions"),
+                'subquestions' => 0,
+                'hasdefaultvalues' => 1,
+                'assessable' => 0,
+                'answerscales' => 0),
             "T" => array(
                 'description' => gT("Long Free Text"),
                 'group' => gT("Text questions"),
