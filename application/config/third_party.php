@@ -268,7 +268,6 @@ return array(
             'Uri.js'
         ),
     ),
-
     'bootstrap-datetimepicker' => array(
         'basePath' => 'third_party.bootstrap-datetimepicker',
         'css' => array(
@@ -298,6 +297,16 @@ return array(
             'moment'
         )
     ),
+    
+    'fancytree' => array(
+        'basePath' => 'third_party.fancytree',
+        'js' => array(
+            'dist/jquery.fancytree-all.js'
+        ),
+        'css' => array(
+            'dist/skin-bootstrap-ls/ui.fancytree.css'
+        ),
+    ),
 
     'jquery-datatable' => array(
         'basePath' => 'third_party.jquery-datatable',
@@ -308,6 +317,34 @@ return array(
             'datatables.js'
         ),
         'depends' => array(
+            'jquery',
+            'bootstrap'
+        )
+    ),
+
+    'es6promise' => array(
+        'basePath' => 'third_party.es6promise',
+        'js' => array(
+            'es6-promise.auto.min.js'
+        )
+    ),
+    
+    'dom2image' => array(
+        'basePath' => 'third_party.dom-to-image',
+        'js' => array(
+            'dist/dom-to-image.min.js',
+        )
+    ),
+
+    'jspdf' => array(
+        'basePath' => 'third_party.jspdf',
+        'js' => array(
+            'jspdf.min.js',
+            'createpdf_worker.js'
+        ),
+        'depends' => array(
+            'dom2image',
+            'es6promise',
             'jquery',
             'bootstrap'
         )
