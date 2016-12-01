@@ -515,6 +515,16 @@ class questionHelper
         "help"=>gT('GeoJSON/Polygon'),
         "caption"=>gT("Polygon"));
 
+        self::$attributes["location_geojson_invert"]=array(
+        "types"=>"98",
+        'category'=>gT('Location'),
+        'sortorder'=>110,
+        'inputtype'=>'switch',
+        'options'=>array(1=>gT('Yes'), 0=>gT('No')),
+        'default' => 1,
+        "help"=>gT('Invert GeoJSON/Polygon'),
+        "caption"=>gT("Invert Polygon"));
+
         self::$attributes["location_polygon"]=array(
         "types"=>"8",
         'category'=>gT('Location'),
@@ -554,6 +564,26 @@ class questionHelper
         'default' => 0,
         "help"=>gT("Allow features to be edited"),
         "caption"=>gT("Show edit features button"));
+
+        self::$attributes["location_marker"]=array(
+        "types"=>"8",
+        'category'=>gT('Location'),
+        'sortorder'=>115,
+        'inputtype'=>'switch',
+        'options'=>array(1=>gT('Yes'), 0=>gT('No')),
+        'default' => 0,
+        "help"=>gT("Allow markers to be draw"),
+        "caption"=>gT("Show markers button"));
+
+        self::$attributes["location_comment"]=array(
+        "types"=>"8",
+        'category'=>gT('Location'),
+        'sortorder'=>116,
+        'inputtype'=>'switch',
+        'options'=>array(1=>gT('Yes'), 0=>gT('No')),
+        'default' => 0,
+        "help"=>gT("Open popup with a textbox for comments"),
+        "caption"=>gT("Show comments box"));
 
         // End Map Options
 

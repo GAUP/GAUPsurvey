@@ -4257,6 +4257,12 @@ function do_geoshape($ia)
             $mapMaxBounds = array("-90", "-180", "90", "180");
         }
 
+        if (isset(Yii::app()->session['survey_'.Yii::app()->getConfig('surveyID')]['srid'])) {
+            $saved_id=Yii::app()->session['survey_'.Yii::app()->getConfig('surveyID')]['srid'];
+        } else {
+            $saved_id='';
+        }
+
         $aGlobalMapScriptVar= array(
             'geonameUser'=>getGlobalSetting('GeoNamesUsername'),// Did we need to urlencode ?
             'geonameLang'=>Yii::app()->language,
@@ -4273,10 +4279,16 @@ function do_geoshape($ia)
             'maxBounds3'=>$mapMaxBounds[3],
             'homeButton'=>$aQuestionAttributes['location_homebutton'],
             'geojson'=>$aQuestionAttributes['location_geojson'],
+            'geojson_invert'=>$aQuestionAttributes['location_geojson_invert'],
             'allow_polygon'=>$aQuestionAttributes['location_polygon'],
             'allow_polyline'=>$aQuestionAttributes['location_polyline'],
             'allow_rectangle'=>$aQuestionAttributes['location_rectangle'],
             'allow_edit_features'=>$aQuestionAttributes['location_edit_features'],
+            'allow_marker'=>$aQuestionAttributes['location_marker'],
+            'allow_comment'=>$aQuestionAttributes['location_comment'],
+            'survey_id'=>Yii::app()->getConfig('surveyID'),
+            'saved_id'=>$saved_id,
+            'question_code'=>$ia[2],
         );
 
         if (($aQuestionAttributes['location_polygon'] == 1) ||
@@ -4331,6 +4343,11 @@ function do_geoshape($ia)
             'currentLat'=>$currentLatLong[0],
             'currentLong'=>$currentLatLong[1],
         );
+        // echo "lixo";
+        // print_r($ia);
+        // print_r($_SESSION['survey_'.Yii::app()->getConfig('surveyID')]['srid']);
+        // print_r($_SESSION['survey_'.Yii::app()->getConfig('surveyID')]);
+        // echo Yii::app()->session['survey_'.Yii::app()->getConfig('surveyID')]['srid'];
         $answer = doRender('/survey/questions/geoshape/location_mapservice/item_100', $itemDatas, true);
     }
     else
