@@ -104,12 +104,19 @@
     if ((typeof(MapOption.geojson) != 'undefined')) {
        geojson = MapOption.geojson;
     }
+    var invert_geojson = false;
+    if ((typeof(MapOption.geojson_invert) != 'undefined')) {
+      if (MapOption.geojson_invert == '1') {
+        invert_geojson = true;
+      }
+    }
 
     var allow_polygon = false;
     var allow_polyline = false;
     var allow_rectangle = false;
     var allow_edit_features = false;
-    var allow_delete_features = false;
+    var allow_marker = false;
+    var allow_comment = false;
 
     if ((typeof(MapOption.allow_polygon) != 'undefined')) {
         allow_polygon = MapOption.allow_polygon;
@@ -127,8 +134,12 @@
         allow_edit_features = MapOption.allow_edit_features;
     }
 
-    if ((typeof(MapOption.allow_polygon) != 'undefined')) {
-        allow_delete_features = MapOption.allow_delete_features;
+    if ((typeof(MapOption.allow_marker) != 'undefined')) {
+        allow_marker = MapOption.allow_marker;
+    }
+
+    if ((typeof(MapOption.allow_comment) != 'undefined')) {
+        allow_comment = MapOption.allow_comment;
     }
 
     var maxBounds0 = -90;
@@ -161,13 +172,16 @@
       geojson = JSON.parse(geojson);
       polygongeojson = L.geoJson(geojson, {
         // Add invert: true to invert the geometries in the GeoJSON file
-        invert: true
+        invert: invert_geojson,
         }).addTo(map);
     }
 
     var featureGroup = L.featureGroup().addTo(map);
 
     var drawtoolbaractions = [];
+    if (allow_marker) {
+      drawtoolbaractions.push(L.Draw.Marker);
+    }
     if (allow_polygon) {
       drawtoolbaractions.push(L.Draw.Polygon);
     }
@@ -177,6 +191,7 @@
     if (allow_rectangle) {
       drawtoolbaractions.push(L.Draw.Rectangle);
     }
+    // console.log(drawtoolbaractions);
     L.DrawToolbar = L.Toolbar.Control.extend({
         options: {
           actions: drawtoolbaractions,
@@ -192,6 +207,7 @@
         className: 'leaflet-draw-toolbar'
       }).addTo(map, featureGroup);
     }
+
 
  		//function zoomExtent(){ // todo: restrict to rect ?
  		//	map.setView([15, 15],1);
@@ -237,11 +253,68 @@
     map.on('draw:created', function(e) {
       var type = e.layerType,
       layer = e.layer;
+      feature = layer.feature = layer.feature || {};
+      feature.type = feature.type || "Feature";
+      var props = feature.properties = feature.properties || {};
+      props.desc = "";
+      props.saved_id = MapOption.saved_id;
+      props.question_code = MapOption.question_code;
+      props.survey_id = MapOption.survey_id;
+      e.layer.options.draggable = true;
       featureGroup.addLayer(layer);
       var data = featureGroup.toGeoJSON();
-      // alert(JSON.stringify(data));
+      // console.log(JSON.stringify(data));
       $("#answer"+name).val(JSON.stringify(data));
+      if (allow_comment == true) {
+        addPopup(layer);
+      }
     });
+
+    function addPopup(layer) {
+      var contiudo = document.createElement("div");
+      contiudo.style = 'text-align: center;';
+    	var content = document.createElement("textarea");
+        content.addEventListener("keyup", function () {
+        	layer.feature.properties.desc = content.value;
+          var data = featureGroup.toGeoJSON();
+          // console.log(JSON.stringify(data));
+          $("#answer"+name).val(JSON.stringify(data));
+        });
+      layer.on("popupopen", function () {
+      	content.value = layer.feature.properties.desc;
+        content.focus();
+      });
+      var b1 = document.createElement('input');
+      b1.type='button';
+      b1.value='OK';
+      b1.onclick= function () { map.closePopup(); };
+      b1.style = 'width:125px';
+      var nl = document.createElement('br');
+      contiudo.appendChild(content);
+      contiudo.appendChild(nl);
+      contiudo.appendChild(b1);
+      layer.bindPopup(contiudo).openPopup();
+    }
+
+    var MyCustomAction = L.ToolbarAction.extend({
+              options: {
+                position: 'topleft',
+                  toolbarIcon: {
+                      html: '&#9634;',
+                      tooltip: 'Limpar Mapa'
+                  }
+              },
+              addHooks: function () {
+                featureGroup.clearLayers();
+                var data = featureGroup.toGeoJSON();
+                // console.log(JSON.stringify(data));
+                $("#answer"+name).val(JSON.stringify(data));
+              }
+          });
+
+    new L.Toolbar.Control({
+        actions: [MyCustomAction]
+    }).addTo(map);
 
  	// 	map.on('singleclick',
  	// 		function(e) {
