@@ -35,6 +35,49 @@ Thank you to everyone who helped with this new release!
 CHANGE LOG
 ------------------------------------------------------
 
+Changes from  2.57.0 (build 161202) to 2.57.1 (build 161205) Dec 5 2016
+-Fixed issue #11947: Session.php is a false positive under ASL/clamav (Bert Hankes)
+-Fixed issue #11974: Very slow rendering of first page (Denis Chenu)
+-Fixed issue #11976: Relevance based on array-dual-scale not working properly (Denis Chenu)
+#Updated translation: Kyrgyz by kmaksat
+#Updated translation: Norwegian (Bokmål) by pmonstad
+#Updated translation: Norwegian (Nynorsk) by pmonstad
+#Updated translation: Spanish (Spain) by c_schmitz, aesteban
+
+Changes from  2.56.1 (build 161117) to 2.57.0 (build 161202) Dec 2 2016
+-New feature: Single table PDF export in statistics
+-Fixed issue #11609: Participant panel lists participants in duplicate, and does't list others for non-superadmins (Olle Haerstedt)
+-Fixed issue #11851: Unstyled HTML when editing default answer options for yes-no question (Olle Haerstedt)
+-Fixed issue #11858: When adding a new group In multi lingual : only 1st language is created (Denis Chenu)
+-Fixed issue #11872: Opening Central Participant Database returns 500 error for PHP 5.3 (Olle Haerstedt)
+-Fixed issue #11875: XSS & SQL injection vulnerabilities in administration (Carsten Schmitz)
+-Fixed issue #11922: XSS vulnerability in administration (Carsten Schmitz)
+-Fixed issue #11960: Cannot use the placeholder button for confirmation email templates (Carsten Schmitz)
+-Fixed issue #11968: Correct "Google Analytics API Key" to "Google Analytics Tracking ID" (Carsten Schmitz)
+-Fixed issue: Email field too short when requesting new password (Carsten Schmitz)
+-Fixed issue: Notice in conditions copy (Carsten Schmitz)
+-Fixed issue: Notice with console commands (Carsten Schmitz)
+-Fixed issue: [security] Possible session fixation on survey entry with token (Carsten Schmitz)
+-Fixed issue: Token bounce processing skipping messages (Carsten Schmitz)
+#Updated translation: Arabic by tamimaleter
+#Updated translation: Catalan by qualitatuvic
+#Updated translation: Finnish by jeskiv
+#Updated translation: German by hokehl, Joffm, c_schmitz
+#Updated translation: German (Informal) by c_schmitz
+#Updated translation: German (Informal) by holch
+#Updated translation: Greek by kiolalis
+#Updated translation: Gujarati by gautamarya
+#Updated translation: Hungarian by kkd
+#Updated translation: Indonesian by radhwaw
+#Updated translation: Kyrgyz by kmaksat
+#Updated translation: Malay by apisznasdin
+#Updated translation: Persian (Afghanistan) - Dari by toxindoom
+#Updated translation: Polish by elissa
+#Updated translation: Polish (Informal) by elissa
+#Updated translation: Portuguese (Brazil) by mauriciofurtado
+#Updated translation: Portuguese (Brazil) by thiagosmartins, mauriciofurtado, holch, flaviove
+#Updated translation: Thai by tomzt
+
 Changes from  2.56 (build 161117) to 2.56.1 (build 161118) Nov 17 2016
 -Fixed issue: Numerical parsing errors of various kind (Markus Flür)
 
@@ -2286,7 +2329,7 @@ Changes from 2.06+ (build 150911) to 2.06+ (build 150930) Sept 30, 2015
 -Fixed issue #9906: Invalid survey is set finished in response table with index complete (Denis Chenu)
 -Fixed issue #9907: Invitations can not be sent before the start date of the tokens / inappropriate error message (Denis Chenu)
 -Fixed issue #9917: Error when updating a label set name containing a simple quote (Denis Chenu)
--Fixed issue #9919: LSRC2 export return partial answer if language code is invalid (Denis Chenu)
+-Fixed issue #9919: LSRC2 export return partial answer if langage code is invalid (Denis Chenu)
 -Fixed issue: Google Analytics code not running (Joao C Costa)
 -Fixed issue: PHP notice in Expression manager and public with Bad exclusive option with exclude auto (Denis Chenu)
 -Updated feature: New LDAP authentication option (Alfredo Esteban)
@@ -3149,7 +3192,7 @@ Changes from 1.92+ (build 120405) to 1.92+ (build 120412) April 12, 2012
 -Fixed issue #5992: After upgrade to Version 1.92+ Build 120405 the uploaded file information gets corrupted. (Thomas White)
 -Fixed issue #6002: @@SURVEYURL@@ placeholder fails to translate (Thomas White)
 -Fixed issue #5976: Iterate survey sets all "uses_left" to "1" even if there has been set a larger number previously (Carsten Schmitz)
--Fixed issue #5997 : upload windows are on default survey language (Denis Chenu)
+-Fixed issue #5997 : upload windows are on default survey langage (Denis Chenu)
 -Fixed issue: Bad HTML in editgroup(Denis Chenu)
 -Fixed issue: Mssqlnative driver gives back weird date format in export (Carsten Schmitz)
 -Fixed issue: With certain Apache configurations then em_javascript.js file was not readable (Carsten Schmitz)
@@ -3178,7 +3221,7 @@ Changes from 1.92+ (build 120325) to 1.92+ (build 120330) Mar 30, 2012
 -Fixed issue #5957: Cannot check integrity database (Carsten Schmitz)
 -Fixed issue #5962: View Response details does not work correctly if responses are filtered (Carsten Schmitz)
 -Fixed issue: Certain French characters garbled in statistics display and other areas (Carsten Schmitz)
--Fixed issue: Error if s_lang are not in survey language (Denis Chenu)
+-Fixed issue: Error if s_lang are not in survey langage (Denis Chenu)
 -Fixed issue: When trying to export to application then not all fields are shown (Carsten Schmitz)
 
 Changes from 1.92+ (build 120324) to 1.92+ (build 120325) Mar 23, 2012
