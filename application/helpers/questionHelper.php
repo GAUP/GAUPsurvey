@@ -750,7 +750,7 @@ class questionHelper
         "caption"=>gT('Integer only'));
 
         self::$attributes["numbers_only"]=array(
-        "types"=>"Q;S*9",
+        "types"=>"Q;S*89",
         'category'=>gT('Other'),
         'sortorder'=>150,
         'inputtype'=>'switch',
