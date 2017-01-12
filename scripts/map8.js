@@ -343,6 +343,23 @@
                  map.setZoom(11);
              }
          });
+(function ($) {
+	  $.each(['show', 'hide'], function (i, ev) {
+	    var el = $.fn[ev];
+	    $.fn[ev] = function () {
+	      this.trigger(ev);
+	      return el.apply(this, arguments);
+	    };
+	  });
+	})(jQuery);
+
+          var questao = question.split('X')[2];
+          questao = questao.split('_')[0];
+          questao = "#question" + questao;
+
+          $(questao).on('show', function() {
+              setTimeout(function(){ map.invalidateSize()}, 400);
+            });
 
  	// 	marker.on('dragend', function(e){
  	// 			var marker = e.target;
