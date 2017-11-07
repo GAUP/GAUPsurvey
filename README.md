@@ -1,4 +1,4 @@
-# Sophisticated online survey software
+# GAUPsurvey
 
 ## About
 Limesurvey is the number one open-source survey software.
