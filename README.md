@@ -29,7 +29,7 @@ The used packages:
    - Other WebServer with PHP Support
 
 ## Releases
-- [Inteligencia Coletiva pela la Democracia (MediaLab-Prado)] (docs/icdemocracia17.md)
+- [Inteligencia Coletiva pela la Democracia (MediaLab-Prado)](docs/icdemocracia17.md)
 
 ## Licence
 GAUPsurvey software is licenced under the [GPL 2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html).
