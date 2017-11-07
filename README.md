@@ -6,7 +6,7 @@ GAUPSurvey is an open source web tool that is possible produce surveys relating 
 
 ### Installation
 
-The main packages:
+The used packages:
  - PHP >= 5.4
  - PHP Extensions: 
   - PHP-FPM
@@ -28,5 +28,8 @@ The main packages:
    - NGinx >= 1.1
    - Other WebServer with PHP Support
 
+## Releases
+- [Inteligencia Coletiva pela la Democracia (MediaLab-Prado)] (docs/icdemocracia17.md)
+
 ## Licence
-GAUP_survey_ software is licenced under the [GPL 2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html).
+GAUPsurvey software is licenced under the [GPL 2.0](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html).
