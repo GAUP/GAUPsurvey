@@ -2,6 +2,8 @@
 
 GAUPSurvey is an open source web tool that is possible produce surveys relating geospacial information to questions and people answers, what it makes possible produce public maps and spatial data that represent their perceptions of the urban space in an answer of question.
 
+The project on [LimeSurvey Project](https://www.limesurvey.org/), surveys creator platform and uses LeafLet javascript framework.
+
 ## Requirements
 
 The necessary packages:
