@@ -9,15 +9,15 @@ GAUPSurvey is an open source web tool that is possible produce surveys relating 
 The used packages:
  - PHP >= 5.4
  - PHP Extensions: 
-  - PHP-FPM
-  - MbString
-  - GD 2 With freetype
-  - IMAP
-  - LDAP
-  - zip
-  - zlib
-  - PDO
-  - Database Driver
+   - PHP-FPM
+   - MbString
+   - GD 2 With freetype
+   - IMAP
+   - LDAP
+   - zip
+   - zlib
+   - PDO
+   - Database Driver
  - Supported Database:
    - MariaDb >= 5.5
    - Microsoft SQL >= 2005
