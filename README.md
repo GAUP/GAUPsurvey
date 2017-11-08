@@ -4,9 +4,7 @@ GAUPSurvey is an open source web tool that is possible produce surveys relating 
 
 ## Requirements
 
-### Installation
-
-The used packages:
+The necessary packages:
  - PHP >= 5.4
  - PHP Extensions: 
    - PHP-FPM
@@ -27,6 +25,34 @@ The used packages:
    - Apache >= 2.4
    - NGinx >= 1.1
    - Other WebServer with PHP Support
+
+### Installation with NGinx
+
+Nginx `default.conf` file configuration:
+```
+server {
+    listen 8889;
+    index index.php index.html;
+    server_name localhost;
+    error_log  /var/log/nginx/error.log;
+    access_log /var/log/nginx/access.log;
+    root /var/www/html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+    
+    location ~ \.php$ { 
+       #If a file isn’t found, 404
+       try_files $uri =404; 
+       #Include Nginx’s fastcgi configuration
+       include /etc/nginx/fastcgi.conf;
+       #Look for the FastCGI Process Manager at this location
+       fastcgi_pass unix:/run/php/php7.0-fpm.sock
+    } 
+}
+
+```
 
 ## Releases
 - [Inteligencia Coletiva pela la Democracia (MediaLab-Prado)](docs/icdemocracia17.md)
