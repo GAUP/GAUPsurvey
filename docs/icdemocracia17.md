@@ -1,10 +1,13 @@
+# Intro
 GAUPsurvey had some of your featured developed in the collective intelligence of democracy hackathon which happended on [Medialab-Prado](http://medialab-prado.es) from November 6th to 17th in 2017.
 
 The Hackathon provide a space and selected some people around the world to help to improvement GAUPsurvey software. The ICD17 staff defines the team workers based on their skills and experiences. So, after event's welcome presentation, we knew the project promotor and the chosen teamworkers, they are:
 
-**Promoter:** _Fausto Bugatti Isolán_ ([@geofausto](https://github.com/geofausto))
+## **Promoter:**
 
-**TeamWork:**
+_Fausto Bugatti Isolán_ ([@geofausto](https://github.com/geofausto))
+
+## **TeamWork:**
 
 Comunnication: _Arthur Cordeiro_ ([@arturvc](https://github.com/arturvc))
 
@@ -17,6 +20,8 @@ Back-End: _Himanshu Zade_ ([@himzad](https://github.com/himzad))
 Front-End: _Ivan Terceros_ ([@ivntres](https://github.com/ivntres))
 
 Back-End: _Marylly Silva_ ([@marylly](http://github/marylly))
+
+## Hackathon Project Development
 
 **_1st Day:_**
 
