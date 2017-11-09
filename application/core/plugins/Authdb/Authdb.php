@@ -218,6 +218,9 @@ class Authdb extends AuthPluginBase
             case 'html':
                 $event->set('label', gT("HTML"));
                 break;
+            case 'geojson':    // Not in the interface, only for RPC
+                $event->set('label', gT("GeoJSON (Only JSON Columns)"));
+                break;
             case 'json':    // Not in the interface, only for RPC
             default:
                 break;
@@ -240,6 +243,7 @@ class Authdb extends AuthPluginBase
         $exports['html'] = $className;
         $exports['json'] = $className;
         $exports['doc'] = $className;
+        $exports['geojson'] = $className;
 
         $event->set('exportplugins', $exports);
     }
@@ -267,6 +271,9 @@ class Authdb extends AuthPluginBase
                 break;
             case "json":
                 $writer = new JsonWriter();
+                break;
+            case "geojson":
+                $writer = new GeoJsonWriter();
                 break;
             case "csv":
             default:

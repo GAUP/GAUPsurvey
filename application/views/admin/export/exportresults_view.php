@@ -38,7 +38,7 @@
                                     <label for='export_from' class="col-sm-2 control-label">
                                         <?php eT("Export format:"); ?>
                                     </label>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-8">
                                         <?php foreach ($exports as $key => $info): ?>
                                             <?php if (!empty($info['label'])): ?>
                                                 <div class="radio">
