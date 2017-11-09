@@ -3,11 +3,11 @@ GAUPsurvey had some of your featured developed in the collective intelligence of
 
 The Hackathon provide a space and selected some people around the world to help to improvement GAUPsurvey software. The ICD17 staff defines the team workers based on their skills and experiences. So, after event's welcome presentation, we knew the project promotor and the chosen teamworkers, they are:
 
-## **Promoter:**
+## **Promoter**
 
 _Fausto Bugatti Isolán_ ([@geofausto](https://github.com/geofausto))
 
-## **TeamWork:**
+## **TeamWork**
 
 Comunnication: _Arthur Cordeiro_ ([@arturvc](https://github.com/arturvc))
 
@@ -30,3 +30,30 @@ The team had focus on understanding the project and talk about its features. The
 **_2nd Day:_**
 
 The define a work methology to organize the task and make it possible improve the software on the ICD17 space.
+
+
+**_3rd Day:_**
+
+
+**_4th Day:_**
+
+
+**_5th Day:_**
+
+
+**_6th Day:_**
+
+
+**_7th Day:_**
+
+
+**_8th Day:_**
+
+
+**_9th Day:_**
+
+
+**_10th Day:_**
+
+
+**_11th Day:_**
