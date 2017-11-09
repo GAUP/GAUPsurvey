@@ -6,11 +6,22 @@ The Hackathon provide a space and selected some people around the world to help 
 
 **TeamWork:**
 
-1st Day:
+Comunnication: _Arthur Cordeiro_ ([@arturvc](https://github.com/arturvc))
+
+Front-End: _Augusto Bott_ ([@augustobott](https://github.com/augustobott))
+
+Front-End: _Berta Díaz_ ([@BertaD93](https://github.com/BertaD93))
+
+Back-End: _Himanshu Zade_ ([@himzad](https://github.com/himzad))
+
+Front-End: _Ivan Terceros_ ([@ivntres](https://github.com/ivntres))
+
+Back-End: _Marylly Silva_ ([@marylly](http://github/marylly))
+
+**_1st Day:_**
+
 The team had focus on understanding the project and talk about its features. There was discuss about the objectives that it is able to achieve during the ICD17 event.
 
-2nd Day:
-The team 
-The define a work methology to organize the task and make it possible improve the software on the ICD17 space. The steps are:
-1. Discuss about
+**_2nd Day:_**
 
+The define a work methology to organize the task and make it possible improve the software on the ICD17 space.
