@@ -29,10 +29,12 @@ The team had focus on understanding the project and talk about its features. The
 
 **_2nd Day:_**
 
-The define a work methology to organize the task and make it possible improve the software on the ICD17 space.
+The define a work methology to organize the task and make it possible improve the software on the ICD17 space. After everybodys knows what we could do, we define which features could be done during the hackathon. We started tasking according which one experience, and divided into a kanban post-its into To Do, Doing and Done task. For all starting working, we created a shared development environment and installed for developer 
 
 
 **_3rd Day:_**
+
+We starting codes
 
 
 **_4th Day:_**
