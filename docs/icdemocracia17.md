@@ -29,16 +29,17 @@ The team had focus on understanding the project and talk about its features. The
 
 **_2nd Day:_**
 
-The define a work methology to organize the task and make it possible improve the software on the ICD17 space. After everybodys knows what we could do, we define which features could be done during the hackathon. We started tasking according which one experience, and divided into a kanban post-its into To Do, Doing and Done task. For all starting working, we created a shared development environment and installed for developer 
+The define a work methology to organize the task and make it possible improve the software on the ICD17 space. After everybodys knows what we could do, we define which features could be done during the hackathon. We started tasking according which one experience, and divided into a kanban post-its into To Do, Doing and Done task. For all starting working, we created a shared development environment and for the developers, a local development environment.
 
 
 **_3rd Day:_**
 
-We starting codes
+We starting document and coding some things. We decided to starting moking and coding a new template for the software surveys, solving some bugs and create a new way to export geo information from surveys responses. For the final presentation, we decide to construct a big real case to show all new features and all software potential.
 
 
 **_4th Day:_**
 
+We could finish the exporting data feature, we have some discuss about the new steps and which new feature we could work on next days, we realized that maybe it could worther feature it is a map plotting with responses map linestring information to help the survey owner could work with location data and statics information.
 
 **_5th Day:_**
 
