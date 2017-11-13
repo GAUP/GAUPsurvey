@@ -144,6 +144,14 @@
                     </a>
                 <?php endif;?>
             <?php endif;?>
+
+
+            <!-- View Saved but not submitted Responses -->
+                <a class="btn btn-default" href='<?php echo $this->createUrl("admin/saved/sa/geoshape_responses/surveyid/$surveyid"); ?>' role="button">
+                    <span class="icon-saved text-success"></span>
+                    <?php eT("View GeoShape Responses"); ?>
+                </a>
+
         </div>
         <?php else: ?>
         <div class="col-md-7 text-right col-md-offset-5">

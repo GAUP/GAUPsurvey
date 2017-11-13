@@ -101,4 +101,47 @@ class saved extends Survey_Common_Action
         {return array('aResults'=>array());}
     }
 
+    public function geoshape_responses($iSurveyId)
+    {
+        $iSurveyId = sanitize_int($iSurveyId);
+        $aViewUrls = array();
+        $questions = $this->get_geoshape_questions($iSurveyId);
+
+        if (!Permission::model()->hasSurveyPermission($iSurveyId, 'responses', 'read'))
+        {
+            die();
+        }
+
+        $aThisSurvey = getSurveyInfo($iSurveyId);
+        $aData['sSurveyName'] = $aThisSurvey['name'];
+        $aData['iSurveyId'] = $iSurveyId;
+        $aData['QuestionsData'] = $questions;
+        $aViewUrls[] = 'savedbar_view';
+        $aViewUrls['geoshape_responses_view'][] = $this->_showSavedList($iSurveyId);
+
+        $this->_renderWrappedTemplate('saved', $aViewUrls, $aData);
+    }
+
+    public function get_geoshape_questions($iSurveyId) {
+        $QuestionAttributeModel = QuestionAttribute::model();
+        $Geoshape_question_type = Question::QUESTION_GEOSHAPE_TYPE;
+        $condition              = "sid = '{$iSurveyId}' AND type = '{$Geoshape_question_type}' ";
+        $geoshape_questions     = Question::model()->findAll($condition);
+
+        foreach($geoshape_questions as $question) {
+            $QuestionAttributeResult = $QuestionAttributeModel->findAll(
+                "qid = :qid AND attribute IN ('location_defaultcoordinates', 'location_mapzoom', 'location_mapzoommax','location_mapservice') ",
+                array(':qid' => $question->qid));
+            $geoshape_questions_attr[$question->qid]['question'] = $question;
+
+            if($QuestionAttributeResult) {
+                foreach($QuestionAttributeResult as $question_attribute) {
+                    $geoshape_questions_attr[$question->qid]['attributes'][$question_attribute->attribute] = $question_attribute->value;
+                }
+            }
+        }
+
+        return $geoshape_questions_attr;
+    }
+
 }
