@@ -106,7 +106,7 @@ class saved extends Survey_Common_Action
         $iSurveyId = sanitize_int($iSurveyId);
         $aViewUrls = array();
         $questions = $this->get_geoshape_questions($iSurveyId);
-
+        $responses = $oResponse = Response::model($iSurveyId)->findAll();
         if (!Permission::model()->hasSurveyPermission($iSurveyId, 'responses', 'read'))
         {
             die();
@@ -116,8 +116,9 @@ class saved extends Survey_Common_Action
         $aData['sSurveyName'] = $aThisSurvey['name'];
         $aData['iSurveyId'] = $iSurveyId;
         $aData['QuestionsData'] = $questions;
+        $aData['ResponsesData'] = $responses;
         $aViewUrls[] = 'savedbar_view';
-        $aViewUrls['geoshape_responses_view'][] = $this->_showSavedList($iSurveyId);
+        $aViewUrls[] = 'geoshape_responses_view';
 
         $this->_renderWrappedTemplate('saved', $aViewUrls, $aData);
     }
