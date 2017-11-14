@@ -81,5 +81,10 @@
 	min-height: 300px;
     height: 90%;
     width: 80%;
-	min-width: 97%;
+	min-width: 80%;
+}
+
+h3 {
+	font-weight:bold;
+	padding-left: 300px;
 }

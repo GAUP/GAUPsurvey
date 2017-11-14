@@ -742,7 +742,7 @@ div.panel.disabled {
 
 .side-body {
   min-height: 800px;
-  margin-left: 320px;
+  margin-left: 0px;
 }
 
 .side-body-margin {
