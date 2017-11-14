@@ -6,7 +6,6 @@
     $(document).ready(function(){
         $('.if-no-js').each(function(index, element) {
             $(element).css({"display":"none"});//hide();
-            $(element).css({"position":"absolute"});//hide();
         });
 
         $(".location").each(function(index,element){

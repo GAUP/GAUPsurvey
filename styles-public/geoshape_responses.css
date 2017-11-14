@@ -75,11 +75,11 @@
 }
 
 .map_responses {
+	margin-left: -10px;
 	padding-left: -10px;
 	position: absolute;
 	min-height: 300px;
     height: 90%;
     width: 80%;
 	min-width: 97%;
-	display: inline;
 }
