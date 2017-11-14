@@ -4,6 +4,7 @@
   *
   */
     $(document).ready(function(){
+
         $('.if-no-js').each(function(index, element) {
             $(element).css({"display":"none"});//hide();
         });
@@ -320,7 +321,7 @@
         console.log(MapJSONResponses);
         // console.log(MapJSONResponses.keys);
         for(const quest of Object.keys(MapJSONResponses)) {
-            // console.log(MapJSONResponses[quest]);
+            console.log(MapJSONResponses[quest]);
             var layer = L.geoJson(MapJSONResponses[quest], {
                 style: {
                     "color": "#ff7800",
@@ -347,4 +348,8 @@
       }
     });
   }
+
+function random_rgba() {
+    return '#'+Math.floor(Math.random()*16777215).toString(16);
+}
  
