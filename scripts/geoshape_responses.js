@@ -324,7 +324,7 @@
             console.log(MapJSONResponses[quest]);
             var layer = L.geoJson(MapJSONResponses[quest], {
                 style: {
-                    "color": "#ff7800",
+                    "color": random_rgba(),
                     "weight": 5,
                     "opacity": 0.65 
                      }
@@ -350,6 +350,6 @@
   }
 
 function random_rgba() {
-    return '#'+Math.floor(Math.random()*16777215).toString(16);
+    return '#' + Math.floor(Math.random()*16777215).toString(16);
 }
  
