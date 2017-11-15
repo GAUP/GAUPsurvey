@@ -140,6 +140,7 @@ class saved extends Survey_Common_Action
                     $geoshape_questions_attr[$question->qid]['attributes'][$question_attribute->attribute] = $question_attribute->value;
                 }
             }
+            $geoshape_questions_attr[$question->qid]['colorLine'] = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
         }
 
         return $geoshape_questions_attr;

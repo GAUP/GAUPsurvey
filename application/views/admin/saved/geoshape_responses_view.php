@@ -7,8 +7,12 @@
     Yii::App()->getClientScript()->registerPackage('leaflet');
     Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.toolbar-src.js");
     Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'leaflet.toolbar.css');
+    Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'bootstrap.min.css');
+    Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'bootstrap-glyphicons.css');
     Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.draw-src.js");
+    Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.js");
     Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'leaflet.draw.css');
+    Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'leaflet.css');
     Yii::app()->getClientScript()->registerScript('sGlobalMapScriptVar',"LSmap=".ls_json_encode($aGlobalMapScriptVar).";\nLSmaps= new Array();",CClientScript::POS_HEAD);
     Yii::app()->getClientScript()->registerScript('sGlobalMapJSONResponses',"\nMapJSONResponses = new Array();",CClientScript::POS_HEAD);
     Yii::App()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."geoshape_responses.js");
@@ -22,6 +26,17 @@
         <?php echo flattenText($sSurveyName) . ' ' . sprintf(gT('ID: %s'), $iSurveyId); ?>
     </h3>
     <div class="container">
+        <div class="row">
+        <?php foreach($QuestionsData as $question) {
+            ?>
+            <button class="btn" id="buttonToggleLayer" style="background:<?php echo $question['colorLine']?>;color: white;" onClick="showHideMapResponsesLayer('<?php echo $question['question']->title; ?>','<?php echo $iSurveyId; ?>',this)">
+                <span class="glyphicon glyphicon-ok">
+                </span>
+            </button>
+            <?php echo '(' . $question['question']->title .') ' . $question['question']->question; ?>
+            <br>
+        <?php } ?>
+        </div>
         <div class="row">
             <div class="if-no-js">
                 <input
@@ -78,6 +93,7 @@
         }
         $MapJSONResponses[$question['question']->title]["type"] = "FeatureCollection";
         $MapJSONResponses[$question['question']->title]["features"] = $response_features;
+        $MapJSONResponses[$question['question']->title]["colorLine"] = $question['colorLine'];
     }
     Yii::app()->getClientScript()->registerScript('sMapJSONResponses' . $iSurveyId,"\nMapJSONResponses = " . json_encode($MapJSONResponses) . ";",CClientScript::POS_HEAD);
     ?>
