@@ -16,6 +16,7 @@ if (!defined('BASEPATH'))
 */
 class Question extends LSActiveRecord
 {
+    const QUESTION_GEOSHAPE_TYPE = 8;
 
     // Stock the active group_name for questions list filtering
     public $group_name;
