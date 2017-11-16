@@ -4069,47 +4069,6 @@ function do_geoshape($ia)
 
     $answer = "";
 
-    // if (trim($aQuestionAttributes['display_rows'])!='')
-    // {
-    //     //question attribute "display_rows" is set -> we need a textarea to be able to show several rows
-    //     $drows = $aQuestionAttributes['display_rows'];
-    //
-    //     //if a textarea should be displayed we make it equal width to the long text question
-    //     //this looks nicer and more continuous
-    //     if($tiwidth == 50)
-    //     {
-    //         $tiwidth = 40;
-    //     }
-    //     $dispVal = "";
-    //
-    //     if ($_SESSION['survey_'.Yii::app()->getConfig('surveyID')][$ia[1]])
-    //     {
-    //         $dispVal = str_replace("\\", "", $_SESSION['survey_'.Yii::app()->getConfig('surveyID')][$ia[1]]);
-    //
-    //         if ($aQuestionAttributes['numbers_only']==1)
-    //         {
-    //             $dispVal = str_replace('.',$sSeparator,$dispVal);
-    //         }
-    //         $dispVal = htmlspecialchars($dispVal);
-    //     }
-    //
-    //     $answer .= doRender('/survey/questions/shortfreetext/textarea/item', array(
-    //         'extraclass'             => $extraclass,
-    //         'freeTextId'             => 'answer'.$ia[1],
-    //         'labelText'              => gT('Your answer'),
-    //         'name'                   => $ia[1],
-    //         'drows'                  => $drows,
-    //         'tiwidth'                => $tiwidth,
-    //         'checkconditionFunction' => $checkconditionFunction.'(this.value, this.name, this.type)',
-    //         'dispVal'                => $dispVal,
-    //         'maxlength'              => $maxlength,
-    //         'kpclass'                => $kpclass,
-    //         'prefix'                 => $prefix,
-    //         'suffix'                 => $suffix,
-    //         'sm_col'                 => decide_sm_col($prefix, $suffix)
-    //     ), true);
-    // }
-    // elseif((int)($aQuestionAttributes['location_mapservice'])==1)
     if((int)($aQuestionAttributes['location_mapservice'])==1)
     {
         $mapservice      = $aQuestionAttributes['location_mapservice'];
@@ -4256,6 +4215,8 @@ function do_geoshape($ia)
             'allow_edit_features'=>$aQuestionAttributes['location_edit_features'],
             'allow_marker'=>$aQuestionAttributes['location_marker'],
             'allow_comment'=>$aQuestionAttributes['location_comment'],
+            'location_draw_min_limit'=>$aQuestionAttributes['location_draw_min_limit'],
+            'location_draw_max_limit'=>$aQuestionAttributes['location_draw_max_limit'],            
             'survey_id'=>Yii::app()->getConfig('surveyID'),
             'saved_id'=>$saved_id,
             'question_code'=>$ia[2],

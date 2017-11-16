@@ -302,39 +302,9 @@
                         </div>
                     </div>
                     <?php if (!$copying): ?>
-                        <!-- Advanced settings -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingTwo">
-                                <h4 class="panel-title">
-                                    <a class="btn btn-default btn-xs hide-button hidden-xs opened handleAccordion">
-                                        <span class="glyphicon glyphicon-chevron-left"></span>
-                                    </a>
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        <?php eT("Advanced settings"); ?>
-                                    </a>
-                                </h4>
-                            </div>
-
-                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="panel-body">
-                                    <div id="advancedquestionsettingswrapper" >
-                                        <div class="loader">
-                                            <?php eT("Loading..."); ?>
-                                        </div>
-
-                                        <div id="advancedquestionsettings">
-                                            <!-- Content append via ajax -->
-                                        </div>
-                                    </div>
-
-                                    <br />
-                                    <br/>
-                                </div>
-                            </div>
-                        </div>
                         <!-- GeoShape -->
                         <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingThree">
+                            <div class="panel-heading" role="tab" id="headingTwo">
                                 <h4 class="panel-title">
                                     <a class="btn btn-default btn-xs hide-button hidden-xs opened handleAccordion">
                                         <span class="glyphicon glyphicon-chevron-left"></span>
@@ -354,6 +324,36 @@
                                         </div>
                                         <!-- changed the name for geoshape -->    
                                         <div id="geoshapesettings">
+                                            <!-- Content append via ajax -->
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Advanced settings -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTree">
+                                <h4 class="panel-title">
+                                    <a class="btn btn-default btn-xs hide-button hidden-xs opened handleAccordion">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </a>
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <?php eT("Advanced settings"); ?>
+                                    </a>
+                                </h4>
+                            </div>
+
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    <div id="advancedquestionsettingswrapper" >
+                                        <div class="loader">
+                                            <?php eT("Loading..."); ?>
+                                        </div>
+
+                                        <div id="advancedquestionsettings">
                                             <!-- Content append via ajax -->
                                         </div>
                                     </div>

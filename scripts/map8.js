@@ -58,7 +58,8 @@
  		}
  		if(isNaN(MapOption.longitude) || MapOption.longitude==""){
  			MapOption.longitude=10.018924;
- 		}
+		 }
+	
  		var mapOSM = L.tileLayer(tileServerURL.OSM+".png", {
  			maxZoom: 19,
  			subdomains: ["a", "b", "c"],
@@ -140,9 +141,9 @@
 
     if ((typeof(MapOption.allow_comment) != 'undefined')) {
         allow_comment = MapOption.allow_comment;
-    }
+	}
 
-    var maxBounds0 = -90;
+	var maxBounds0 = -90;
     var maxBounds1 = -180;
     var maxBounds2 = 90;
     var maxBounds3 = 180;
@@ -190,8 +191,8 @@
     }
     if (allow_rectangle) {
       drawtoolbaractions.push(L.Draw.Rectangle);
-    }
-    // console.log(drawtoolbaractions);
+	}
+	
     L.DrawToolbar = L.Toolbar.Control.extend({
         options: {
           actions: drawtoolbaractions,
@@ -246,10 +247,10 @@
  		}).addTo(map);
 
 		var quantFaces = 0;
-    map.on('draw:created', function(e) {
+    	map.on('draw:created', function(e) {
 			quantFaces++;
 
-			if(quantFaces <= 1) {
+			if(quantFaces >= MapOption.location_draw_min_limit && quantFaces <= MapOption.location_draw_max_limit ) {
 				var type = e.layerType,
 				layer = e.layer;
 				feature = layer.feature = layer.feature || {};
@@ -262,39 +263,24 @@
 				e.layer.options.draggable = true;
 				featureGroup.addLayer(layer);
 				var data = featureGroup.toGeoJSON();
-				// console.log(JSON.stringify(data));
+
 				$("#answer"+name).val(JSON.stringify(data));
 				if (allow_comment == true) {
 					addPopup(layer);
 				}
-			} else {
+			}
+		});
+		
+		map.on('layerremove', function(e) {
+			var deleted = (typeof e.layer._firingCount === "undefined" ? 0 : e.layer._firingCount);
+			var quantLayer = featureGroup.getLayers().length - deleted;
+			if( quantLayer < MapOption.location_draw_max_limit) {
+				DrawToolOption.addTo(map);				
+			} else if( quantLayer >= MapOption.location_draw_max_limit) {
 				DrawToolOption.removeFrom(map);
 			}
 		});
 		
-		map.on('draw:deletestop', function(){
-			alert("Oiiie");
-			quantFaces--;
-			if(quantFaces <= 1) {
-				DrawToolOption.addTo(map);
-			}
-		});
-
-		map.on('draw:deletestop', function(){
-			alert("Oiiie 2=3");
-			quantFaces--;
-			if(quantFaces <= 1) {
-				DrawToolOption.addTo(map);
-			}
-		});
-
-		map.on('draw:deleted', function(){
-			alert("Oiiie 2");
-			quantFaces--;
-			if(quantFaces <= 1) {
-				DrawToolOption.addTo(map);
-			}
-		});
 
     function addPopup(layer) {
       var contiudo = document.createElement("div");
@@ -303,7 +289,6 @@
         content.addEventListener("keyup", function () {
         	layer.feature.properties.desc = content.value;
           var data = featureGroup.toGeoJSON();
-          // console.log(JSON.stringify(data));
           $("#answer"+name).val(JSON.stringify(data));
         });
       layer.on("popupopen", function () {
