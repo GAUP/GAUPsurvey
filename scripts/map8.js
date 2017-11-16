@@ -58,7 +58,8 @@
  		}
  		if(isNaN(MapOption.longitude) || MapOption.longitude==""){
  			MapOption.longitude=10.018924;
- 		}
+		 }
+	
  		var mapOSM = L.tileLayer(tileServerURL.OSM+".png", {
  			maxZoom: 19,
  			subdomains: ["a", "b", "c"],
@@ -140,9 +141,9 @@
 
     if ((typeof(MapOption.allow_comment) != 'undefined')) {
         allow_comment = MapOption.allow_comment;
-    }
+	}
 
-    var maxBounds0 = -90;
+	var maxBounds0 = -90;
     var maxBounds1 = -180;
     var maxBounds2 = 90;
     var maxBounds3 = 180;
@@ -190,8 +191,8 @@
     }
     if (allow_rectangle) {
       drawtoolbaractions.push(L.Draw.Rectangle);
-    }
-    // console.log(drawtoolbaractions);
+	}
+	
     L.DrawToolbar = L.Toolbar.Control.extend({
         options: {
           actions: drawtoolbaractions,
@@ -199,7 +200,7 @@
             className: 'leaflet-draw-toolbar' // Style the toolbar with Leaflet.draw's custom CSS
         }
     });
-    new L.DrawToolbar().addTo(map);
+    var DrawToolOption = new L.DrawToolbar().addTo(map);
 
     if (allow_edit_features) {
       new L.EditToolbar.Control({
@@ -207,11 +208,6 @@
         className: 'leaflet-draw-toolbar'
       }).addTo(map, featureGroup);
     }
-
-
- 		//function zoomExtent(){ // todo: restrict to rect ?
- 		//	map.setView([15, 15],1);
- 		//}
 
  		var pt1 = latLng[0].split("@");
  		var pt2 = latLng[1].split("@");
@@ -250,25 +246,41 @@
  		  collapsed: true
  		}).addTo(map);
 
-    map.on('draw:created', function(e) {
-      var type = e.layerType,
-      layer = e.layer;
-      feature = layer.feature = layer.feature || {};
-      feature.type = feature.type || "Feature";
-      var props = feature.properties = feature.properties || {};
-      props.desc = "";
-      props.saved_id = MapOption.saved_id;
-      props.question_code = MapOption.question_code;
-      props.survey_id = MapOption.survey_id;
-      e.layer.options.draggable = true;
-      featureGroup.addLayer(layer);
-      var data = featureGroup.toGeoJSON();
-      // console.log(JSON.stringify(data));
-      $("#answer"+name).val(JSON.stringify(data));
-      if (allow_comment == true) {
-        addPopup(layer);
-      }
-    });
+		var quantFaces = 0;
+    	map.on('draw:created', function(e) {
+			quantFaces++;
+
+			if(quantFaces >= MapOption.location_draw_min_limit && quantFaces <= MapOption.location_draw_max_limit ) {
+				var type = e.layerType,
+				layer = e.layer;
+				feature = layer.feature = layer.feature || {};
+				feature.type = feature.type || "Feature";
+				var props = feature.properties = feature.properties || {};
+				props.desc = "";
+				props.saved_id = MapOption.saved_id;
+				props.question_code = MapOption.question_code;
+				props.survey_id = MapOption.survey_id;
+				e.layer.options.draggable = true;
+				featureGroup.addLayer(layer);
+				var data = featureGroup.toGeoJSON();
+
+				$("#answer"+name).val(JSON.stringify(data));
+				if (allow_comment == true) {
+					addPopup(layer);
+				}
+			}
+		});
+		
+		map.on('layerremove', function(e) {
+			var deleted = (typeof e.layer._firingCount === "undefined" ? 0 : e.layer._firingCount);
+			var quantLayer = featureGroup.getLayers().length - deleted;
+			if( quantLayer < MapOption.location_draw_max_limit) {
+				DrawToolOption.addTo(map);				
+			} else if( quantLayer >= MapOption.location_draw_max_limit) {
+				DrawToolOption.removeFrom(map);
+			}
+		});
+		
 
     function addPopup(layer) {
       var contiudo = document.createElement("div");
@@ -277,7 +289,6 @@
         content.addEventListener("keyup", function () {
         	layer.feature.properties.desc = content.value;
           var data = featureGroup.toGeoJSON();
-          // console.log(JSON.stringify(data));
           $("#answer"+name).val(JSON.stringify(data));
         });
       layer.on("popupopen", function () {
