@@ -1,0 +1,39 @@
+        </div> <!-- main-col -->
+    </div><!-- main-row -->
+</div><!-- outerframe -->
+
+<div id="navbar" class="navbar-collapse collapse col-xs-12">
+    <ul class="nav navbar-nav">
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        {SAVE_LINKS}
+        {CLEARALL_LINKS}
+        {QUESTION_INDEX_MENU}
+    </ul>
+</div><!--/.nav-collapse -->
+
+<div class="col-md-12">
+    {PERCENTCOMPLETE} 
+    {LANGUAGECHANGER}
+</div>
+
+<div class="col-md-6">
+    <img width = "50px" id='page_logo' src='{TEMPLATEURL}/files/logo.png' class="clearfix pull-right" />
+</div>
+
+
+<!-- Bootstrap Modal Alert -->
+<div id="bootstrap-alert-box-modal" class="modal fade">
+     <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="min-height:40px;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">&nbsp;</h4>
+            </div>
+            <div class="modal-body"><p></p></div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn btn-default">{CLOSE_TRANSLATION}</a>
+            </div>
+        </div>
+    </div>
+</div>

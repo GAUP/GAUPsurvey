@@ -1,0 +1,56 @@
+<!--
+<div class="alert alert-danger" role="alert"  id="checkjavascript">
+    {CHECKJAVASCRIPT}
+</div>
+-->
+
+<div class="logo col-md-6">
+    <img width = "100px" id='page_logo' src='{TEMPLATEURL}/files/logo.png' class="clearfix pull-right" />
+</div>
+
+<script>
+document.getElementById("checkjavascript").style.display = 'none';
+</script>
+
+<div class="col-md-12">
+	<div class="col-md-4">
+		<!-- Survey Description -->
+		<div class="container-fluid">
+		 <div class="row" id="welcome-container">
+		    <div>
+		        <h1>{SURVEYNAME}</h1><br />
+		        <p class='surveydescription text-info'></p>
+			    <div class="row d-flex justify-content-end">
+			      <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
+		        <i class="fa fa-instagram fa-lg" aria-hidden="true"></i>
+		        <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
+		        <i class="fa fa-share-alt fa-lg" aria-hidden="true"></i>
+			    </div>
+		    </div>
+		 </div>
+		</div>
+		<!-- Survey Welcome -->
+		<div class="container-fluid">
+		 <div class="row d-flex justify-content-start survey-welcome">
+		  <div>
+		   <p class='surveywelcome text-center'>
+		      {WELCOME}
+		   </p>
+		  </div>   
+		 </div>
+		</div>
+
+		<!-- Question number -->
+		<div class="container-fluid">
+		 <div class="row d-flex justify-content-start questions-number">
+		  <div>
+		   <p class="x-questions">{THEREAREXQUESTIONS}</p>
+		  </div>
+		 </div>
+		</div>
+	</div>
+
+	<div class="col-md-8">
+		<iframe class="embed-responsive-item" width = "100%" height = "500px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.openstreetmap.org/export/embed.html?bbox=-3.831310272216797%2C40.3873508718188%2C-3.6397361755371094%2C40.4604011700758&amp;layer=mapnik" style="border: 1px solid black" allowfullscreen></iframe><br/><small><a href="https://www.openstreetmap.org/#map=13/40.4239/-3.7355">Ver mapa más grande</a></small>
+	</div>
+</div>

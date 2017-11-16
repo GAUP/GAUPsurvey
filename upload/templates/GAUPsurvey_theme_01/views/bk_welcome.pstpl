@@ -1,0 +1,43 @@
+<div class="alert alert-danger" role="alert"  id="checkjavascript">
+    {CHECKJAVASCRIPT}
+</div>
+
+
+<script>
+document.getElementById("checkjavascript").style.display = 'none';
+</script>
+
+<!-- Survey Description -->
+<div class="container-fluid">
+ <div class="row col-md-4" id="welcome-container">
+    <div>
+        <h1>{SURVEYNAME}</h1><br />
+        <p class='surveydescription text-info'></p>
+	    <div class="row d-flex justify-content-end">
+	      <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
+        <i class="fa fa-instagram fa-lg" aria-hidden="true"></i>
+        <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
+        <i class="fa fa-share-alt fa-lg" aria-hidden="true"></i>
+	    </div>
+    </div>
+ </div>
+</div>
+<!-- Survey Welcome -->
+<div class="container-fluid col-md-4">
+ <div class="row d-flex justify-content-start survey-welcome">
+  <div>
+   <p class='surveywelcome text-center'>
+      {WELCOME}
+   </p>
+  </div>   
+ </div>
+</div>
+
+<!-- Question number -->
+<div class="container-fluid col-md-4">
+ <div class="row d-flex justify-content-start questions-number">
+  <div>
+   <p class="x-questions">{THEREAREXQUESTIONS}</p>
+  </div>
+ </div>
+</div>

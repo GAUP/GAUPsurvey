@@ -1,0 +1,74 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   '@angular/cli' ]
+2 info using npm@1.4.14
+3 info using node@v0.10.29
+4 verbose cache add [ '@angular/cli', null ]
+5 verbose cache add name=undefined spec="@angular/cli" args=["@angular/cli",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: '@angular/cli',
+6 verbose parsed url   path: '@angular/cli',
+6 verbose parsed url   href: '@angular/cli' }
+7 verbose cache add name="" spec="angular/cli" args=["","angular/cli"]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'angular/cli',
+8 verbose parsed url   path: 'angular/cli',
+8 verbose parsed url   href: 'angular/cli' }
+9 silly lockFile 5cecaa1c-angular-cli angular/cli
+10 verbose lock angular/cli /home/abott/.npm/5cecaa1c-angular-cli.lock
+11 info maybeGithub Attempting angular/cli from git://github.com/angular/cli
+12 silly lockFile 057ccbdd-git-github-com-angular-cli git://github.com/angular/cli
+13 verbose lock git://github.com/angular/cli /home/abott/.npm/057ccbdd-git-github-com-angular-cli.lock
+14 verbose addRemoteGit [ 'git://github.com/angular/cli', 'master' ]
+15 verbose git clone git://github.com/angular/cli Cloning into bare repository '/home/abott/.npm/_git-remotes/git-github-com-angular-cli-057ccbdd'...
+15 verbose git clone git://github.com/angular/cli fatal: remote error:
+15 verbose git clone git://github.com/angular/cli   Repository not found.
+16 silly lockFile 057ccbdd-git-github-com-angular-cli git://github.com/angular/cli
+17 silly lockFile 057ccbdd-git-github-com-angular-cli git://github.com/angular/cli
+18 info maybeGithub Attempting angular/cli from git+ssh://git@github.com:angular/cli
+19 silly lockFile 515723dd-git-github-com-angular-cli git@github.com:angular/cli
+20 verbose lock git@github.com:angular/cli /home/abott/.npm/515723dd-git-github-com-angular-cli.lock
+21 verbose addRemoteGit [ 'git@github.com:angular/cli', 'master' ]
+22 error git clone git@github.com:angular/cli Cloning into bare repository '/home/abott/.npm/_git-remotes/git-github-com-angular-cli-515723dd'...
+22 error git clone git@github.com:angular/cli ERROR: Repository not found.
+22 error git clone git@github.com:angular/cli fatal: Could not read from remote repository.
+22 error git clone git@github.com:angular/cli
+22 error git clone git@github.com:angular/cli Please make sure you have the correct access rights
+22 error git clone git@github.com:angular/cli and the repository exists.
+23 silly lockFile 515723dd-git-github-com-angular-cli git@github.com:angular/cli
+24 silly lockFile 515723dd-git-github-com-angular-cli git@github.com:angular/cli
+25 silly lockFile 5cecaa1c-angular-cli angular/cli
+26 silly lockFile 5cecaa1c-angular-cli angular/cli
+27 error addLocal Could not install angular/cli
+28 error Error: ENOENT, stat 'angular/cli'
+29 error If you need help, you may report this *entire* log,
+29 error including the npm and node versions, at:
+29 error     <http://github.com/npm/npm/issues>
+30 error System Linux 4.10.0-38-generic
+31 error command "/usr/bin/node" "/usr/bin/npm" "install" "-g" "@angular/cli"
+32 error cwd /home/abott/workspace/GAUPsurvey/upload/templates/Test_GAUPsurvey_01/views
+33 error node -v v0.10.29
+34 error npm -v 1.4.14
+35 error path angular/cli
+36 error code ENOENT
+37 error errno 34
+38 verbose exit [ 34, true ]
