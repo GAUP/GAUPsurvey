@@ -152,5 +152,41 @@
                 </div>
             </div>
         </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="btn btn-default btn-xs hide-button hidden-xs opened handleAccordion">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <?php eT("Geo Shape Settings"); ?>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    <p>
+                        <a id="showadvancedattributes"><?php eT("Show advanced settings"); ?></a><a id="hideadvancedattributes" style="display:none;"><?php eT("Hide advanced settings"); ?></a>
+                    </p>
+
+                    <div id="geoshapesettingswrapper" style="display:none;">
+                        <div class="loader">
+                            <?php eT("Loading..."); ?>
+                        </div>
+
+                        <div id="geoshapesettings">
+                            <!-- Content append via ajax -->
+                        </div>
+                    </div>
+
+                    <br />
+                <br/>
+                </div>
+            </div>
+        </div>
+
+       
+
     </div>
 </div>

@@ -332,6 +332,37 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- GeoShape -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingThree">
+                                <h4 class="panel-title">
+                                    <a class="btn btn-default btn-xs hide-button hidden-xs opened handleAccordion">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                    </a>
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
+                                        <?php eT("Geo Shape"); ?>
+                                    </a>
+                                </h4>
+                            </div>
+
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="panel-body">
+                                    <!-- changed the name for geoshape -->
+                                    <div id="geoshapesettingswrapper" >
+                                        <div class="loader">
+                                            <?php eT("Loading..."); ?>
+                                        </div>
+                                        <!-- changed the name for geoshape -->    
+                                        <div id="geoshapesettings">
+                                            <!-- Content append via ajax -->
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
                         <?php endif; ?>
 
                 </div>

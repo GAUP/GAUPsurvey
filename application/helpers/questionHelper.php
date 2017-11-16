@@ -585,6 +585,23 @@ class questionHelper
         "help"=>gT("Open popup with a textbox for comments"),
         "caption"=>gT("Show comments box"));
 
+        self::$attributes["location_draw_min_limit"] = array(
+            "types"     => "8",
+            'category'  => gT('Location'),
+            'sortorder' => 117,
+            'inputtype' => 'text',
+            'default'   => 0,
+            "help"      => gT("Define a minimal quantity of features that could be draw in the geoshape question."),
+            "caption"   => gT("Minimal features limits available"));
+
+        self::$attributes["location_draw_max_limit"] = array(
+            "types"     => "8",
+            'category'  => gT('Location'),
+            'sortorder' => 118,
+            'inputtype' => 'text',
+            'default'   => 0,
+            "help"      => gT("Define a maximum quantity of features that could be draw in the geoshape question."),
+            "caption"   => gT("Maximum features limits available"));
         // End Map Options
 
         self::$attributes["hide_tip"]=array(
