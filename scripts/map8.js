@@ -199,7 +199,7 @@
             className: 'leaflet-draw-toolbar' // Style the toolbar with Leaflet.draw's custom CSS
         }
     });
-    new L.DrawToolbar().addTo(map);
+    var DrawToolOption = new L.DrawToolbar().addTo(map);
 
     if (allow_edit_features) {
       new L.EditToolbar.Control({
@@ -207,11 +207,6 @@
         className: 'leaflet-draw-toolbar'
       }).addTo(map, featureGroup);
     }
-
-
- 		//function zoomExtent(){ // todo: restrict to rect ?
- 		//	map.setView([15, 15],1);
- 		//}
 
  		var pt1 = latLng[0].split("@");
  		var pt2 = latLng[1].split("@");
@@ -250,25 +245,56 @@
  		  collapsed: true
  		}).addTo(map);
 
+		var quantFaces = 0;
     map.on('draw:created', function(e) {
-      var type = e.layerType,
-      layer = e.layer;
-      feature = layer.feature = layer.feature || {};
-      feature.type = feature.type || "Feature";
-      var props = feature.properties = feature.properties || {};
-      props.desc = "";
-      props.saved_id = MapOption.saved_id;
-      props.question_code = MapOption.question_code;
-      props.survey_id = MapOption.survey_id;
-      e.layer.options.draggable = true;
-      featureGroup.addLayer(layer);
-      var data = featureGroup.toGeoJSON();
-      // console.log(JSON.stringify(data));
-      $("#answer"+name).val(JSON.stringify(data));
-      if (allow_comment == true) {
-        addPopup(layer);
-      }
-    });
+			quantFaces++;
+
+			if(quantFaces <= 1) {
+				var type = e.layerType,
+				layer = e.layer;
+				feature = layer.feature = layer.feature || {};
+				feature.type = feature.type || "Feature";
+				var props = feature.properties = feature.properties || {};
+				props.desc = "";
+				props.saved_id = MapOption.saved_id;
+				props.question_code = MapOption.question_code;
+				props.survey_id = MapOption.survey_id;
+				e.layer.options.draggable = true;
+				featureGroup.addLayer(layer);
+				var data = featureGroup.toGeoJSON();
+				// console.log(JSON.stringify(data));
+				$("#answer"+name).val(JSON.stringify(data));
+				if (allow_comment == true) {
+					addPopup(layer);
+				}
+			} else {
+				DrawToolOption.removeFrom(map);
+			}
+		});
+		
+		map.on('draw:deletestop', function(){
+			alert("Oiiie");
+			quantFaces--;
+			if(quantFaces <= 1) {
+				DrawToolOption.addTo(map);
+			}
+		});
+
+		map.on('draw:deletestop', function(){
+			alert("Oiiie 2=3");
+			quantFaces--;
+			if(quantFaces <= 1) {
+				DrawToolOption.addTo(map);
+			}
+		});
+
+		map.on('draw:deleted', function(){
+			alert("Oiiie 2");
+			quantFaces--;
+			if(quantFaces <= 1) {
+				DrawToolOption.addTo(map);
+			}
+		});
 
     function addPopup(layer) {
       var contiudo = document.createElement("div");

@@ -4266,8 +4266,8 @@ function do_geoshape($ia)
             ($aQuestionAttributes['location_rectangle'] == 1) ||
             ($aQuestionAttributes['location_edit_features'] == 1)
         ) {
-          Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet72.js");
-          Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'leaflet72.css');
+          Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.js");
+          Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'leaflet.css');
           Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.toolbar-src.js");
           Yii::app()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl') . 'leaflet.toolbar.css');
           Yii::app()->getClientScript()->registerScriptFile(Yii::app()->getConfig('generalscripts')."leaflet.draw-src.js");

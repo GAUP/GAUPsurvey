@@ -103,7 +103,7 @@
     </div>
 
     <!-- Map -->
-    <div id="map_<?php echo $name; ?>" style="width: <?php echo $location_mapwidth; ?>px; height: <?php echo $location_mapheight; ?>px;">
+    <div id="map_<?php echo $name; ?>" class="map_answer">
 
     </div>
 

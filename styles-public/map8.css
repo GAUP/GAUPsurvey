@@ -73,6 +73,15 @@
 .geoname_search .ui-menu .ui-state-disabled a {
 	cursor: default;
 }
+
+.map_answer {
+	position: absolute;
+    height: 300px;
+    width: 80%;
+    /* display: block; */
+    min-width: 97%;
+}
+
 ul.coords
 /* icon support */
 /*
