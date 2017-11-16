@@ -1747,6 +1747,61 @@ class questions extends Survey_Common_Action
         $aAttributesPrepared = array();
         foreach ($aAttributesWithValues as $iKey => $aAttribute)
         {
+            if(preg_match('/location_/', $aAttribute['name'])){
+                continue;
+            }
+            if ($aAttribute['i18n'] == false)
+                $aAttributesPrepared[] = $aAttribute;
+            else
+            {
+                foreach ($aLanguages as $sLanguage)
+                {
+                    $aAttributeModified = $aAttribute;
+                    $aAttributeModified['name'] = $aAttributeModified['name'] . '_' . $sLanguage;
+                    $aAttributeModified['language'] = $sLanguage;
+                    if ($aAttributeModified['readonly'] == true && $thissurvey['active'] == 'N')
+                        $aAttributeModified['readonly'] == false;
+
+                    if (isset($aAttributeModified[$sLanguage]['value']))
+                        $aAttributeModified['value'] = $aAttributeModified[$sLanguage]['value'];
+                    else
+                        $aAttributeModified['value'] = $aAttributeModified['default'];
+
+                    $aAttributesPrepared[] = $aAttributeModified;
+                }
+            }
+        }
+        $aData['bIsActive'] = ($thissurvey['active']=='Y');
+        $aData['attributedata'] = $aAttributesPrepared;
+        
+        $this->getController()->renderPartial('/admin/survey/Question/advanced_settings_view', $aData);
+    }
+
+    //added this module for geoshape view
+    public function ajaxquestiongeoshapeattributes()
+    {
+
+        $surveyid = (int) Yii::app()->request->getParam('sid',0);
+        $qid = (int) Yii::app()->request->getParam('qid',0);
+        $type = Yii::app()->request->getParam('question_type');
+        $thissurvey = getSurveyInfo($surveyid);
+
+        if(!$thissurvey) die();
+
+        $aLanguages = array_merge(
+            array(Survey::model()->findByPk($surveyid)->language), 
+            Survey::model()->findByPk($surveyid)->additionalLanguages
+            );
+        $aAttributesWithValues = Question::model()->getAdvancedSettingsWithValues($qid, $type, $surveyid);
+
+        uasort($aAttributesWithValues, 'categorySort');
+
+        $aAttributesPrepared = array();
+        foreach ($aAttributesWithValues as $iKey => $aAttribute)
+        {
+            if(!preg_match('/location_/', $aAttribute['name'])){
+                continue;
+            }
             if ($aAttribute['i18n'] == false)
                 $aAttributesPrepared[] = $aAttribute;
             else

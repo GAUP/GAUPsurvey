@@ -336,6 +336,7 @@ function updatequestionattributes()
 
     $('.loader').show();
     $('#advancedquestionsettings').html('');
+    $('#geoshapesettings').html('');
     var selected_value = qDescToCode[''+$("#question_type_child .selected").text()];
     if (selected_value==undefined) selected_value = $("#question_type").val();
     $('#advancedquestionsettings').load(attr_url,{qid:$('#qid').val(),
@@ -343,7 +344,29 @@ function updatequestionattributes()
         sid:$('#sid').val()
     }, function(){
         // Loads the tooltips for the toolbars
-
+        $('.loader').hide();
+        $('label[title]').qtip({
+            style: {name: 'cream',
+                tip: true,
+                color:'#111111',
+                border: {
+                    width: 1,
+                    radius: 5,
+                    color: '#EADF95'}
+            },
+            position: {adjust: {
+                    screen: true, scroll:true},
+                corner: {
+                    target: 'bottomRight'}
+            },
+            show: {effect: {length:50}}
+        });}
+    );
+    
+    $('#geoshapesettings').load(geoshape_attr_url,{qid:$('#qid').val(),
+        question_type:selected_value,
+        sid:$('#sid').val()
+    }, function(){
         // Loads the tooltips for the toolbars
         $('.loader').hide();
         $('label[title]').qtip({

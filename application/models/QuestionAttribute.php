@@ -180,7 +180,9 @@ class QuestionAttribute extends LSActiveRecord
             return $aQuestionAttributesStatic[$iQuestionID];
         }
         $aQuestionAttributes=array();
+
         $oQuestion = Question::model()->find("qid=:qid",array('qid'=>$iQuestionID)); // Maybe take parent_qid attribute before this qid attribute
+
         if ($oQuestion)
         {
             if($sLanguage){
@@ -199,6 +201,7 @@ class QuestionAttribute extends LSActiveRecord
 
             $aAttributeNames = \ls\helpers\questionHelper::getQuestionAttributesSettings($sType);
 
+
             /* Get whole existing attribute for this question in an array*/
             $oAttributeValues = QuestionAttribute::model()->findAll("qid=:qid",array('qid'=>$iQuestionID));
             $aAttributeValues=array();
@@ -213,6 +216,7 @@ class QuestionAttribute extends LSActiveRecord
             }
             // Fill with aQuestionAttributes with default attribute or with aAttributeValues
             // Can not use array_replace due to i18n
+
             foreach($aAttributeNames as $aAttribute)
             {
 
@@ -243,6 +247,7 @@ class QuestionAttribute extends LSActiveRecord
         }
         else
         {
+            var_dump($oQuestion);
             return false; // return false but don't set $aQuestionAttributesStatic[$iQuestionID]
         }
         $aQuestionAttributesStatic[$iQuestionID]=$aQuestionAttributes;

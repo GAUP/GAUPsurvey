@@ -5,6 +5,7 @@
 ?>
 <script type='text/javascript'>
     var attr_url = "<?php echo $this->createUrl('admin/questions', array('sa' => 'ajaxquestionattributes')); ?>";
+    var geoshape_attr_url = "<?php echo $this->createUrl('admin/questions', array('sa' => 'ajaxquestiongeoshapeattributes')); ?>";
     var imgurl = '<?php echo Yii::app()->getConfig('imageurl'); ?>';
     var validateUrl = "<?php echo $sValidateUrl; ?>";
     <?php echo $qTypeOutput; ?>
