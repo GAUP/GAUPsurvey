@@ -60,3 +60,9 @@ We could finish the exporting data feature, we have some discuss about the new s
 
 
 **_11th Day:_**
+
+## Developed Features
+
+* Created a special section for GeoShape configuration in map question edit form.
+* A responsive, easy flow using bootstrap 4.0 and Font Awesome 4.7 front-end frameworks survey template that it will be the GAUPsurvey default template.
+
